@@ -15,12 +15,8 @@ class AdminProductController extends Controller
     {
         $query = Product::query()
             ->with('category:id,name')
-            ->withExists('orderItems as is_referenced_in_orders');
-
-        if ($search = trim((string) $request->query('q', ''))) {
-            $needle = mb_strtolower($search);
-            $query->whereRaw('LOWER(name) LIKE ?', ["%{$needle}%"]);
-        }
+            ->withExists('orderItems as is_referenced_in_orders')
+            ->search($request->query('q'));
 
         if ($categoryId = $request->query('category_id')) {
             $query->where('category_id', (int) $categoryId);

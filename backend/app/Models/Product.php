@@ -43,4 +43,16 @@ class Product extends Model
     {
         return $query->where('is_active', true);
     }
+
+    public function scopeSearch(Builder $query, ?string $term): Builder
+    {
+        $clean = trim((string) $term);
+        if ($clean === '') {
+            return $query;
+        }
+
+        $escaped = addcslashes(mb_strtolower($clean), '%_\\');
+
+        return $query->whereRaw("LOWER(name) LIKE ? ESCAPE '\\'", ["%{$escaped}%"]);
+    }
 }

@@ -28,7 +28,7 @@ class SaveProductRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:5000'],
             'price' => ['required', 'numeric', 'gt:0'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
-            'image_url' => ['nullable', 'string', 'max:2048'],
+            'image_url' => ['nullable', 'url:http,https', 'max:2048'],
             'is_active' => ['required', 'boolean'],
         ];
     }

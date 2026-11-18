@@ -13,12 +13,8 @@ class ProductController extends Controller
     {
         $query = Product::query()
             ->active()
-            ->with('category:id,name');
-
-        if ($search = trim((string) $request->query('q', ''))) {
-            $needle = mb_strtolower($search);
-            $query->whereRaw('LOWER(name) LIKE ?', ["%{$needle}%"]);
-        }
+            ->with('category:id,name')
+            ->search($request->query('q'));
 
         if ($categoryId = $request->query('category_id')) {
             $query->where('category_id', (int) $categoryId);

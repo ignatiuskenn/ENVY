@@ -2,7 +2,7 @@
 
 Test results against the 10 acceptance checks defined in Section 17 of the CubeTech Web Development Internship Assessment.
 
-- **Automated Backend Suite**: `php artisan test` (`19` tests, `125` assertions — SQLite `:memory:` via `RefreshDatabase`, including RBAC & customer auth tests)
+- **Automated Backend Suite**: `php artisan test` (`24` tests, `149` assertions — SQLite `:memory:` via `RefreshDatabase`, including RBAC, customer auth, and security hardening tests)
 - **Frontend Checks**: `npm run lint`, `npm run build`, and Node money-math check (`PHP 325.50`)
 - **Live Browser QA**: Tested against `http://localhost:5173` (Vite) + `http://127.0.0.1:8000` (Laravel + PostgreSQL 18) at `1280×800` (Desktop) and `375×812` (Mobile)
 
