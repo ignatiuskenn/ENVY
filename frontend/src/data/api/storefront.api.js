@@ -22,5 +22,6 @@ export function submitCheckout(payload) {
   return apiRequest('/checkout', {
     method: 'POST',
     body: payload,
+    customerAuth: true,
   });
 }

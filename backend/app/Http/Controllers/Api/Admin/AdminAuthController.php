@@ -22,6 +22,12 @@ class AdminAuthController extends Controller
             ]);
         }
 
+        if (! $user->isAdmin()) {
+            return response()->json([
+                'message' => 'Forbidden. Admin privileges are required.',
+            ], 403);
+        }
+
         $token = $user->createToken('envy-admin-demo')->plainTextToken;
 
         return response()->json([
@@ -30,6 +36,7 @@ class AdminAuthController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
+                'role' => $user->role->value,
             ],
         ]);
     }
@@ -43,6 +50,7 @@ class AdminAuthController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
+                'role' => $user->role->value,
             ],
         ]);
     }

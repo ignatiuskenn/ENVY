@@ -24,7 +24,7 @@ export function Footer() {
               <Link to="/cart" className="hover:text-white">Shopping Cart</Link>
             </li>
             <li>
-              <Link to="/admin/login" className="hover:text-white">Admin Demo Portal</Link>
+              <Link to="/login" className="hover:text-white">Customer Sign In</Link>
             </li>
           </ul>
         </div>

@@ -1,10 +1,12 @@
-import { Menu, ShoppingBag, ShieldCheck, X } from 'lucide-react';
+import { LogOut, Menu, ShoppingBag, User, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '../../data/context/useCart';
+import { useCustomerAuth } from '../../data/context/useCustomerAuth';
 
 export function Navbar() {
   const { itemCount } = useCart();
+  const { user, isAuthenticated, logout } = useCustomerAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navClass = ({ isActive }) =>
@@ -29,12 +31,34 @@ export function Navbar() {
           <NavLink to="/products" className={navClass}>
             Shop All
           </NavLink>
-          <NavLink to="/admin/login" className={navClass}>
-            <span className="inline-flex items-center gap-1.5">
-              <ShieldCheck className="h-4 w-4" />
-              Admin
-            </span>
-          </NavLink>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-3 text-sm">
+              <span className="inline-flex items-center gap-1.5 font-semibold text-neutral-800">
+                <User className="h-4 w-4 text-neutral-500" />
+                {user?.name}
+              </span>
+              <button
+                type="button"
+                onClick={logout}
+                className="inline-flex cursor-pointer items-center gap-1 text-xs font-semibold text-neutral-500 hover:text-red-600"
+              >
+                <LogOut className="h-3.5 w-3.5" />
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-4">
+              <NavLink to="/login" className={navClass}>
+                Sign In
+              </NavLink>
+              <NavLink
+                to="/register"
+                className="rounded-full bg-neutral-950 px-3.5 py-1.5 text-xs font-bold text-white transition hover:bg-neutral-800"
+              >
+                Register
+              </NavLink>
+            </div>
+          )}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -72,9 +96,27 @@ export function Navbar() {
             <NavLink to="/cart" className={navClass} onClick={() => setMobileOpen(false)}>
               Cart ({itemCount})
             </NavLink>
-            <NavLink to="/admin/login" className={navClass} onClick={() => setMobileOpen(false)}>
-              Admin Dashboard
-            </NavLink>
+            {isAuthenticated ? (
+              <button
+                type="button"
+                onClick={() => {
+                  logout();
+                  setMobileOpen(false);
+                }}
+                className="text-left text-sm font-semibold text-red-600"
+              >
+                Sign Out ({user?.name})
+              </button>
+            ) : (
+              <>
+                <NavLink to="/login" className={navClass} onClick={() => setMobileOpen(false)}>
+                  Sign In
+                </NavLink>
+                <NavLink to="/register" className={navClass} onClick={() => setMobileOpen(false)}>
+                  Register
+                </NavLink>
+              </>
+            )}
           </div>
         </nav>
       )}

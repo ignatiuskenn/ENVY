@@ -5,16 +5,24 @@ namespace Tests\Feature;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentMethod;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class CheckoutTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_checkout_validates_required_fields_and_blocks_whitespace_name(): void
+    private function actAsCustomer(): void
     {
         $this->seed();
+        Sanctum::actingAs(User::where('email', 'customer@envy-demo.test')->firstOrFail());
+    }
+
+    public function test_checkout_validates_required_fields_and_blocks_whitespace_name(): void
+    {
+        $this->actAsCustomer();
         $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
 
         $response = $this->postJson('/api/checkout', [
@@ -40,7 +48,7 @@ class CheckoutTest extends TestCase
 
     public function test_checkout_detects_price_or_availability_changes_and_returns_conflict(): void
     {
-        $this->seed();
+        $this->actAsCustomer();
         $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
 
         $response = $this->postJson('/api/checkout', [
@@ -61,7 +69,7 @@ class CheckoutTest extends TestCase
 
     public function test_checkout_blocks_out_of_stock_and_inactive_products(): void
     {
-        $this->seed();
+        $this->actAsCustomer();
         $oos = Product::where('stock_quantity', 0)->firstOrFail();
         $inactive = Product::where('is_active', false)->firstOrFail();
 
@@ -84,7 +92,7 @@ class CheckoutTest extends TestCase
 
     public function test_checkout_calculates_exact_php_325_50_total_creates_snapshots_and_deducts_stock(): void
     {
-        $this->seed();
+        $this->actAsCustomer();
         $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail(); // PHP 120.00, stock 40
         $band = Product::where('name', 'ENVY Performance Wristband')->firstOrFail(); // PHP 85.50, stock 35
 
