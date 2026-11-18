@@ -12,8 +12,17 @@ export function ProductDetailPage() {
   const { id } = useParams();
   const { addItem } = useCart();
 
-  const [quantity, setQuantity] = useState(1);
+  const [qtyState, setQtyState] = useState({ id, value: 1 });
   const [feedback, setFeedback] = useState('');
+
+  const quantity = qtyState.id === id ? qtyState.value : 1;
+  const setQuantity = (updater) => {
+    setQtyState((prev) => {
+      const current = prev.id === id ? prev.value : 1;
+      const next = typeof updater === 'function' ? updater(current) : updater;
+      return { id, value: next };
+    });
+  };
 
   const { data, loading, error, status, retry } = useAsyncData(
     () => fetchProductById(id),

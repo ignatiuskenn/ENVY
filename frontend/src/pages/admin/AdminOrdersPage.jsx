@@ -74,7 +74,7 @@ export function AdminOrdersPage() {
                   <td className="px-4 py-3 text-right">
                     <Link
                       to={`/admin/orders/${order.id}`}
-                      className="rounded-lg bg-slate-950 px-3 py-1.5 text-xs font-bold text-white hover:bg-slate-800"
+                      className="inline-block whitespace-nowrap rounded-lg bg-slate-950 px-3 py-1.5 text-xs font-bold text-white hover:bg-slate-800"
                     >
                       View Details
                     </Link>
