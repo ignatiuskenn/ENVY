@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\AdminCategoryController;
 use App\Http\Controllers\Api\Admin\AdminOrderController;
 use App\Http\Controllers\Api\Admin\AdminOverviewController;
 use App\Http\Controllers\Api\Admin\AdminProductController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\ProductController;
@@ -22,16 +23,27 @@ Route::get('/health', function (): JsonResponse {
     ]);
 });
 
-// Customer Storefront
+// Public Storefront Browsing
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show'])->whereNumber('id');
-Route::post('/checkout', [CheckoutController::class, 'store']);
 
-// Admin Demo Auth & Dashboard
+// Customer Auth & Authenticated Checkout
+Route::prefix('auth')->group(function (): void {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::middleware('auth:sanctum')->group(function (): void {
+        Route::get('/me', [AuthController::class, 'me']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+    });
+});
+
+Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('auth:sanctum');
+
+// Admin Demo Auth & RBAC-Protected Dashboard
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->prefix('admin')->group(function (): void {
+Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function (): void {
     Route::get('/me', [AdminAuthController::class, 'me']);
     Route::post('/logout', [AdminAuthController::class, 'logout']);
 

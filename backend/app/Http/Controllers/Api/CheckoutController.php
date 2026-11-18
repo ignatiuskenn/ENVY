@@ -17,7 +17,10 @@ class CheckoutController extends Controller
     public function store(CheckoutRequest $request): JsonResponse
     {
         try {
-            $order = $this->checkoutService->placeOrder($request->validated());
+            $order = $this->checkoutService->placeOrder(
+                $request->validated(),
+                $request->user()?->id
+            );
 
             return response()->json(['data' => $order], 201);
         } catch (CheckoutConflictException $e) {

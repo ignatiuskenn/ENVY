@@ -17,9 +17,9 @@ class CheckoutService
      *
      * @param  array<string, mixed>  $payload
      */
-    public function placeOrder(array $payload): Order
+    public function placeOrder(array $payload, ?int $userId = null): Order
     {
-        return DB::transaction(function () use ($payload): Order {
+        return DB::transaction(function () use ($payload, $userId): Order {
             $requestedItems = collect($payload['items']);
             $productIds = $requestedItems->pluck('product_id')->all();
 
@@ -91,6 +91,7 @@ class CheckoutService
             $formattedTotal = number_format($subtotalCents / 100, 2, '.', '');
 
             $order = Order::create([
+                'user_id' => $userId,
                 'order_number' => $this->generateOrderNumber(),
                 'customer_name' => $payload['customer_name'],
                 'customer_email' => strtolower(trim($payload['customer_email'])),

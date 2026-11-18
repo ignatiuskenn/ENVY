@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -13,12 +14,22 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Demo-only admin credentials (unsuitable for production; documented in README)
+        // Demo-only admin & customer credentials (unsuitable for production; documented in README)
         User::updateOrCreate(
             ['email' => 'admin@envy-demo.test'],
             [
                 'name' => 'ENVY Demo Admin',
                 'password' => Hash::make('EnvyDemo2026!'),
+                'role' => UserRole::Admin,
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'customer@envy-demo.test'],
+            [
+                'name' => 'ENVY Demo Customer',
+                'password' => Hash::make('EnvyCustomer2026!'),
+                'role' => UserRole::Customer,
             ]
         );
 

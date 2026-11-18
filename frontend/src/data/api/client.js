@@ -1,4 +1,8 @@
-import { API_BASE_URL, DEMO_ADMIN_STORAGE_KEY } from '../../constants/config';
+import {
+  API_BASE_URL,
+  CUSTOMER_TOKEN_STORAGE_KEY,
+  DEMO_ADMIN_STORAGE_KEY,
+} from '../../constants/config';
 
 export class ApiError extends Error {
   constructor(message, status, data = null) {
@@ -10,7 +14,13 @@ export class ApiError extends Error {
 }
 
 export async function apiRequest(path, options = {}) {
-  const { method = 'GET', body, auth = false, headers = {} } = options;
+  const {
+    method = 'GET',
+    body,
+    auth = false,
+    customerAuth = false,
+    headers = {},
+  } = options;
 
   const requestHeaders = {
     Accept: 'application/json',
@@ -23,6 +33,11 @@ export async function apiRequest(path, options = {}) {
 
   if (auth) {
     const token = localStorage.getItem(DEMO_ADMIN_STORAGE_KEY);
+    if (token) {
+      requestHeaders.Authorization = `Bearer ${token}`;
+    }
+  } else if (customerAuth) {
+    const token = localStorage.getItem(CUSTOMER_TOKEN_STORAGE_KEY);
     if (token) {
       requestHeaders.Authorization = `Bearer ${token}`;
     }

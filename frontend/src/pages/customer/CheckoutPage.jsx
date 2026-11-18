@@ -1,20 +1,22 @@
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Lock } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { EmptyState } from '../../components/ui/StateFeedback';
+import { EmptyState, LoadingState } from '../../components/ui/StateFeedback';
 import { PAYMENT_METHODS } from '../../constants/paymentMethods';
 import { fetchProducts, submitCheckout } from '../../data/api/storefront.api';
 import { useCart } from '../../data/context/useCart';
+import { useCustomerAuth } from '../../data/context/useCustomerAuth';
 import { calculateLineCents, formatPeso, fromCents } from '../../utils/money';
 import { validateCheckoutForm } from '../../utils/validators';
 
 export function CheckoutPage() {
   const navigate = useNavigate();
   const { items, subtotal, total, clearCart, syncWithLatestProducts } = useCart();
+  const { user, isAuthenticated, checking } = useCustomerAuth();
 
   const [form, setForm] = useState({
-    customer_name: '',
-    customer_email: '',
+    customer_name: user?.name || '',
+    customer_email: user?.email || '',
     customer_contact: '',
     delivery_address: '',
     payment_method: PAYMENT_METHODS[0],
@@ -24,6 +26,14 @@ export function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState('');
   const [conflictChanges, setConflictChanges] = useState([]);
+
+  if (checking) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+        <LoadingState label="Checking your account session..." />
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -40,6 +50,36 @@ export function CheckoutPage() {
             </Link>
           }
         />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="mx-auto max-w-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="rounded-2xl border border-neutral-200 bg-white p-8 text-center shadow-sm">
+          <Lock className="mx-auto h-9 w-9 text-neutral-900" />
+          <h1 className="mt-3 text-2xl font-black text-neutral-950">Sign in to Checkout</h1>
+          <p className="mt-2 text-sm text-neutral-600">
+            Your cart ({items.length} item line{items.length > 1 ? 's' : ''}) is saved. Sign in or create a customer account to place your order.
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link
+              to="/login"
+              state={{ from: '/checkout' }}
+              className="rounded-xl bg-neutral-950 px-6 py-2.5 text-sm font-bold text-white hover:bg-neutral-800"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/register"
+              state={{ from: '/checkout' }}
+              className="rounded-xl border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-800 hover:border-neutral-950"
+            >
+              Create Account
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
