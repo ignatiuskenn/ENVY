@@ -85,16 +85,16 @@ export function OrderConfirmationPage() {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            to="/products"
+            to="/orders"
             className="rounded-xl bg-neutral-950 px-5 py-2.5 text-sm font-bold text-white hover:bg-neutral-800"
           >
-            Continue Shopping
+            Track My Orders
           </Link>
           <Link
-            to="/"
+            to="/products"
             className="rounded-xl border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-neutral-800 hover:border-neutral-950"
           >
-            Back to Home
+            Continue Shopping
           </Link>
         </div>
       </div>

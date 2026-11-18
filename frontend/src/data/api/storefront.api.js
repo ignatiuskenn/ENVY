@@ -25,3 +25,9 @@ export function submitCheckout(payload) {
     customerAuth: true,
   });
 }
+
+export function fetchMyOrders() {
+  return apiRequest('/my-orders', {
+    customerAuth: true,
+  });
+}

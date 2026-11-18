@@ -17,6 +17,7 @@ import { CheckoutPage } from './pages/customer/CheckoutPage';
 import { CustomerLoginPage } from './pages/customer/CustomerLoginPage';
 import { CustomerRegisterPage } from './pages/customer/CustomerRegisterPage';
 import { HomePage } from './pages/customer/HomePage';
+import { MyOrdersPage } from './pages/customer/MyOrdersPage';
 import { OrderConfirmationPage } from './pages/customer/OrderConfirmationPage';
 import { ProductDetailPage } from './pages/customer/ProductDetailPage';
 import { ProductsPage } from './pages/customer/ProductsPage';
@@ -47,6 +48,7 @@ export default function App() {
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+                <Route path="/orders" element={<MyOrdersPage />} />
                 <Route path="/login" element={<CustomerLoginPage />} />
                 <Route path="/register" element={<CustomerRegisterPage />} />
               </Route>

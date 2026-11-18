@@ -32,7 +32,10 @@ export function Navbar() {
             Shop All
           </NavLink>
           {isAuthenticated ? (
-            <div className="flex items-center gap-3 text-sm">
+            <div className="flex items-center gap-4 text-sm">
+              <NavLink to="/orders" className={navClass}>
+                My Orders
+              </NavLink>
               <span className="inline-flex items-center gap-1.5 font-semibold text-neutral-800">
                 <User className="h-4 w-4 text-neutral-500" />
                 {user?.name}
@@ -97,16 +100,21 @@ export function Navbar() {
               Cart ({itemCount})
             </NavLink>
             {isAuthenticated ? (
-              <button
-                type="button"
-                onClick={() => {
-                  logout();
-                  setMobileOpen(false);
-                }}
-                className="text-left text-sm font-semibold text-red-600"
-              >
-                Sign Out ({user?.name})
-              </button>
+              <>
+                <NavLink to="/orders" className={navClass} onClick={() => setMobileOpen(false)}>
+                  My Orders
+                </NavLink>
+                <button
+                  type="button"
+                  onClick={() => {
+                    logout();
+                    setMobileOpen(false);
+                  }}
+                  className="text-left text-sm font-semibold text-red-600"
+                >
+                  Sign Out ({user?.name})
+                </button>
+              </>
             ) : (
               <>
                 <NavLink to="/login" className={navClass} onClick={() => setMobileOpen(false)}>

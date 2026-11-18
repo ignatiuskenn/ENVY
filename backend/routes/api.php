@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\AdminProductController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CheckoutController;
+use App\Http\Controllers\Api\CustomerOrderController;
 use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +40,7 @@ Route::prefix('auth')->group(function (): void {
 });
 
 Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/my-orders', [CustomerOrderController::class, 'index'])->middleware('auth:sanctum');
 
 // Admin Demo Auth & RBAC-Protected Dashboard
 Route::post('/admin/login', [AdminAuthController::class, 'login']);

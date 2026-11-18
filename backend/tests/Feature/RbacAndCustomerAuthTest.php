@@ -78,4 +78,35 @@ class RbacAndCustomerAuthTest extends TestCase
             ->assertCreated()
             ->assertJsonPath('data.user_id', $customer->id);
     }
+
+    public function test_my_orders_returns_only_authenticated_customers_orders(): void
+    {
+        $this->seed();
+        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
+        $customer = User::where('email', 'customer@envy-demo.test')->firstOrFail();
+        $other = User::factory()->create(['email' => 'other@example.com']);
+
+        $payload = [
+            'customer_name' => 'Demo Customer',
+            'customer_email' => 'customer@envy-demo.test',
+            'customer_contact' => '+63 917 555 0199',
+            'delivery_address' => 'BGC, Taguig',
+            'payment_method' => PaymentMethod::CashOnDelivery->value,
+            'items' => [
+                ['product_id' => $socks->id, 'quantity' => 1, 'expected_unit_price' => 120.00],
+            ],
+        ];
+
+        $this->getJson('/api/my-orders')->assertUnauthorized();
+
+        Sanctum::actingAs($other);
+        $this->postJson('/api/checkout', $payload)->assertCreated();
+
+        Sanctum::actingAs($customer);
+        $this->postJson('/api/checkout', $payload)->assertCreated();
+
+        $res = $this->getJson('/api/my-orders')->assertOk();
+        $res->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.user_id', $customer->id);
+    }
 }

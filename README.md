@@ -109,6 +109,7 @@ Run `php artisan migrate:fresh --seed` inside `backend/` to reset the database a
 | `/login` & `/register` | Customer sign-in and account registration |
 | `/checkout` | Authenticated customer checkout form with validation, live price/stock recheck, and submit lock |
 | `/order-confirmation` | Order summary with unique order number and initial `Pending` status |
+| `/orders` | Customer order history & live status tracker (for signed-in customers) |
 
 ### Admin Routes *(Protected — Redirects to `/admin/login` when unauthenticated)*
 | Route | Description |
