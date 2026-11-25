@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DEMO_ADMIN_STORAGE_KEY } from '../../constants/config';
+import { CUSTOMER_TOKEN_STORAGE_KEY, DEMO_ADMIN_STORAGE_KEY } from '../../constants/config';
 import { adminLogin, adminLogout, fetchAdminMe } from '../api/admin.api';
 import { AdminAuthContext } from './useAdminAuth';
 
@@ -36,6 +36,18 @@ export function AdminAuthProvider({ children }) {
     return res.user;
   };
 
+  const setSession = (token, adminUser) => {
+    localStorage.setItem(DEMO_ADMIN_STORAGE_KEY, token);
+    setUser(adminUser);
+    setChecking(false);
+  };
+
+  const clearSession = () => {
+    localStorage.removeItem(DEMO_ADMIN_STORAGE_KEY);
+    setUser(null);
+    setChecking(false);
+  };
+
   const logout = async () => {
     try {
       await adminLogout();
@@ -43,6 +55,7 @@ export function AdminAuthProvider({ children }) {
       // Ignore token expiration on logout
     } finally {
       localStorage.removeItem(DEMO_ADMIN_STORAGE_KEY);
+      localStorage.removeItem(CUSTOMER_TOKEN_STORAGE_KEY);
       setUser(null);
     }
   };
@@ -54,6 +67,8 @@ export function AdminAuthProvider({ children }) {
         isAuthenticated: Boolean(user),
         checking,
         login,
+        setSession,
+        clearSession,
         logout,
       }}
     >

@@ -1,4 +1,4 @@
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { AdminLayout } from './components/shared/AdminLayout';
 import { Footer } from './components/shared/Footer';
 import { Navbar } from './components/shared/Navbar';
@@ -7,7 +7,6 @@ import { CartProvider } from './data/context/CartContext';
 import { CustomerAuthProvider } from './data/context/CustomerAuthContext';
 import { AdminCategoriesPage } from './pages/admin/AdminCategoriesPage';
 import { AdminCustomersPage } from './pages/admin/AdminCustomersPage';
-import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminOrderDetailPage } from './pages/admin/AdminOrderDetailPage';
 import { AdminOrdersPage } from './pages/admin/AdminOrdersPage';
 import { AdminOverviewPage } from './pages/admin/AdminOverviewPage';
@@ -53,7 +52,7 @@ export default function App() {
                 <Route path="/register" element={<CustomerRegisterPage />} />
               </Route>
 
-              <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route path="/admin/login" element={<Navigate to="/login" replace />} />
 
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminOverviewPage />} />

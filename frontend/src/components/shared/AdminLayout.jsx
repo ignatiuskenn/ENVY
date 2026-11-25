@@ -12,6 +12,7 @@ import {
 import { useState } from 'react';
 import { Link, NavLink, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '../../data/context/useAdminAuth';
+import { useCustomerAuth } from '../../data/context/useCustomerAuth';
 import { LoadingState } from '../ui/StateFeedback';
 
 const NAV_ITEMS = [
@@ -24,6 +25,7 @@ const NAV_ITEMS = [
 
 export function AdminLayout() {
   const { isAuthenticated, checking, user, logout } = useAdminAuth();
+  const { clearSession: clearCustomerSession } = useCustomerAuth();
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -36,12 +38,13 @@ export function AdminLayout() {
   }
 
   if (!isAuthenticated || user?.role !== 'admin') {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   const handleLogout = async () => {
     await logout();
-    navigate('/admin/login', { replace: true });
+    clearCustomerSession();
+    navigate('/login', { replace: true });
   };
 
   const linkClass = ({ isActive }) =>

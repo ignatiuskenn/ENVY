@@ -96,8 +96,9 @@ Run `php artisan migrate:fresh --seed` inside `backend/` to reset the database a
 ## Routes & Demo Credentials
 
 ### Demo Credentials *(Demo-Only — Unsuitable for Production)*
-- **Admin** (`/admin/login` — direct URL, hidden from customer navbar): `admin@envy-demo.test` / `EnvyDemo2026!`
-- **Customer** (`/login`): `customer@envy-demo.test` / `EnvyCustomer2026!`
+- **Unified Sign-In** (`/login` — `/admin/login` redirects to `/login`):
+  - **Customer**: `customer@envy-demo.test` / `EnvyCustomer2026!`
+  - **Admin**: `admin@envy-demo.test` / `EnvyDemo2026!`
 
 ### Customer Routes
 | Route | Description |
@@ -106,15 +107,15 @@ Run `php artisan migrate:fresh --seed` inside `backend/` to reset the database a
 | `/products` | Product listing with combined search, category filter, and price sorting |
 | `/products/:id` | Product details, stock status, quantity selector, and up to 3 related active products |
 | `/cart` | Persistent shopping cart with duplicate-item merging and safe PHP calculations |
-| `/login` & `/register` | Customer sign-in and account registration |
+| `/login` & `/register` | Unified customer/admin sign-in and customer account registration |
 | `/checkout` | Authenticated customer checkout form with validation, live price/stock recheck, and submit lock |
 | `/order-confirmation` | Order summary with unique order number and initial `Pending` status |
 | `/orders` | Customer order history & live status tracker (for signed-in customers) |
 
-### Admin Routes *(Protected — Redirects to `/admin/login` when unauthenticated)*
+### Admin Routes *(Protected — Redirects to `/login` when unauthenticated)*
 | Route | Description |
 | :--- | :--- |
-| `/admin/login` | Demo admin login screen |
+| `/admin/login` | Redirects to unified `/login` screen |
 | `/admin` | Overview dashboard (5 KPI summary cards) |
 | `/admin/products` | Product CRUD, filters, and order-reference delete guard ("Mark Inactive Instead") |
 | `/admin/categories` | Category CRUD with case-insensitive uniqueness and assigned-product delete block |

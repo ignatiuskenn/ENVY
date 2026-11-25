@@ -1,6 +1,7 @@
 import { LogOut, Menu, ShoppingBag, User, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAdminAuth } from '../../data/context/useAdminAuth';
 import { useCart } from '../../data/context/useCart';
 import { useCustomerAuth } from '../../data/context/useCustomerAuth';
 import { EnvyPixelMark } from './EnvyPixelMark';
@@ -8,7 +9,13 @@ import { EnvyPixelMark } from './EnvyPixelMark';
 export function Navbar() {
   const { itemCount } = useCart();
   const { user, isAuthenticated, logout } = useCustomerAuth();
+  const { clearSession: clearAdminSession } = useAdminAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+    clearAdminSession();
+  };
 
   const navClass = ({ isActive }) =>
     `font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
@@ -35,6 +42,11 @@ export function Navbar() {
           </NavLink>
           {isAuthenticated ? (
             <div className="flex items-center gap-4 text-xs">
+              {user?.role === 'admin' && (
+                <NavLink to="/admin" className={navClass}>
+                  Admin
+                </NavLink>
+              )}
               <NavLink to="/orders" className={navClass}>
                 My Orders
               </NavLink>
@@ -44,7 +56,7 @@ export function Navbar() {
               </span>
               <button
                 type="button"
-                onClick={logout}
+                onClick={handleLogout}
                 className="inline-flex cursor-pointer items-center gap-1 font-mono font-semibold uppercase tracking-wider text-[#8A99AD] hover:text-red-400"
               >
                 <LogOut className="h-3.5 w-3.5" />
@@ -103,13 +115,18 @@ export function Navbar() {
             </NavLink>
             {isAuthenticated ? (
               <>
+                {user?.role === 'admin' && (
+                  <NavLink to="/admin" className={navClass} onClick={() => setMobileOpen(false)}>
+                    Admin
+                  </NavLink>
+                )}
                 <NavLink to="/orders" className={navClass} onClick={() => setMobileOpen(false)}>
                   My Orders
                 </NavLink>
                 <button
                   type="button"
                   onClick={() => {
-                    logout();
+                    handleLogout();
                     setMobileOpen(false);
                   }}
                   className="text-left font-mono text-xs font-bold uppercase tracking-wider text-red-400"

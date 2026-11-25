@@ -1,10 +1,12 @@
 import { LogIn } from 'lucide-react';
 import { useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useAdminAuth } from '../../data/context/useAdminAuth';
 import { useCustomerAuth } from '../../data/context/useCustomerAuth';
 
 export function CustomerLoginPage() {
-  const { isAuthenticated, login } = useCustomerAuth();
+  const { isAuthenticated, user, login } = useCustomerAuth();
+  const { isAuthenticated: isAdminAuth, setSession: setAdminSession } = useAdminAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const redirectTo = location.state?.from || '/';
@@ -13,6 +15,10 @@ export function CustomerLoginPage() {
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  if (isAdminAuth || user?.role === 'admin') {
+    return <Navigate to="/admin" replace />;
+  }
 
   if (isAuthenticated) {
     return <Navigate to={redirectTo} replace />;
@@ -24,12 +30,23 @@ export function CustomerLoginPage() {
     setError('');
   };
 
+  const fillDemoAdmin = () => {
+    setEmail('admin@envy-demo.test');
+    setPassword('EnvyDemo2026!');
+    setError('');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSubmitting(true);
     try {
-      await login({ email, password });
+      const res = await login({ email, password });
+      if (res.user?.role === 'admin') {
+        setAdminSession(res.token, res.user);
+        navigate('/admin', { replace: true });
+        return;
+      }
       navigate(redirectTo, { replace: true });
     } catch (err) {
       setError(err.message || 'Invalid email or password.');
@@ -93,14 +110,26 @@ export function CustomerLoginPage() {
           </button>
         </form>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[#262E36] pt-4 text-xs">
-          <button
-            type="button"
-            onClick={fillDemoCustomer}
-            className="cursor-pointer font-mono font-bold text-[#24FF6A] hover:underline"
-          >
-            Fill Demo Customer
-          </button>
+        <div className="mt-4 flex flex-wrap items-start justify-between gap-2 border-t border-[#262E36] pt-4 text-xs">
+          <div className="flex flex-col items-start gap-1.5">
+            <button
+              type="button"
+              onClick={fillDemoCustomer}
+              className="cursor-pointer font-mono font-bold text-[#24FF6A] hover:underline"
+            >
+              Fill Demo Customer
+            </button>
+            <button
+              type="button"
+              onClick={fillDemoAdmin}
+              className="cursor-pointer font-mono font-bold text-[#24FF6A] hover:underline"
+            >
+              Fill Demo Admin
+            </button>
+            <span className="text-[11px] text-[#8A99AD]">
+              Demo credentials only — unsuitable for production
+            </span>
+          </div>
           <span className="text-[#8A99AD]">
             New here?{' '}
             <Link

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CUSTOMER_TOKEN_STORAGE_KEY } from '../../constants/config';
+import { CUSTOMER_TOKEN_STORAGE_KEY, DEMO_ADMIN_STORAGE_KEY } from '../../constants/config';
 import {
   fetchCustomerMe,
   loginCustomer,
@@ -40,7 +40,7 @@ export function CustomerAuthProvider({ children }) {
     const res = await loginCustomer(credentials);
     localStorage.setItem(CUSTOMER_TOKEN_STORAGE_KEY, res.token);
     setUser(res.user);
-    return res.user;
+    return res;
   };
 
   const register = async (payload) => {
@@ -50,6 +50,12 @@ export function CustomerAuthProvider({ children }) {
     return res.user;
   };
 
+  const clearSession = () => {
+    localStorage.removeItem(CUSTOMER_TOKEN_STORAGE_KEY);
+    setUser(null);
+    setChecking(false);
+  };
+
   const logout = async () => {
     try {
       await logoutCustomer();
@@ -57,6 +63,7 @@ export function CustomerAuthProvider({ children }) {
       // Ignore expired token
     } finally {
       localStorage.removeItem(CUSTOMER_TOKEN_STORAGE_KEY);
+      localStorage.removeItem(DEMO_ADMIN_STORAGE_KEY);
       setUser(null);
     }
   };
@@ -69,6 +76,7 @@ export function CustomerAuthProvider({ children }) {
         checking,
         login,
         register,
+        clearSession,
         logout,
       }}
     >
