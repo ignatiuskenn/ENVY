@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
@@ -98,5 +100,22 @@ class AdminCatalogTest extends TestCase
             ->assertJsonPath('data.name', 'Training Accessories');
 
         $this->deleteJson("/api/admin/categories/{$catId}")->assertOk();
+    }
+
+    public function test_admin_can_upload_product_image_file(): void
+    {
+        Storage::fake('public');
+        $this->actAsAdmin();
+
+        $res = $this->post('/api/admin/products/image', [
+            'image' => UploadedFile::fake()->create('jacket.png', 64, 'image/png'),
+        ], ['Accept' => 'application/json']);
+
+        $res->assertCreated();
+        $url = $res->json('url');
+        $this->assertNotEmpty($url);
+
+        $path = parse_url($url, PHP_URL_PATH);
+        $this->get($path)->assertOk();
     }
 }

@@ -28,6 +28,7 @@ Route::get('/health', function (): JsonResponse {
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show'])->whereNumber('id');
+Route::get('/uploads/products/{filename}', [AdminProductController::class, 'serveImage'])->where('filename', '[A-Za-z0-9._-]+');
 
 // Customer Auth & Authenticated Checkout
 Route::prefix('auth')->group(function (): void {
@@ -53,6 +54,7 @@ Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function ()
     Route::get('/customers', [AdminOverviewController::class, 'customers']);
 
     Route::get('/products', [AdminProductController::class, 'index']);
+    Route::post('/products/image', [AdminProductController::class, 'uploadImage']);
     Route::post('/products', [AdminProductController::class, 'store']);
     Route::put('/products/{product}', [AdminProductController::class, 'update']);
     Route::delete('/products/{product}', [AdminProductController::class, 'destroy']);

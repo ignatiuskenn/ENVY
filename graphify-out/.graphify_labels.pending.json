@@ -32,6 +32,5 @@
   "30": "React + Vite",
   "31": "OrderStatus",
   "32": "App\\Http\\Controllers\\Api\\Admin\\AdminProductController",
-  "34": "App\\Http\\Controllers\\Api\\ProductController",
   "35": "Illuminate\\Http\\JsonResponse"
 }

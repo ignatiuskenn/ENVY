@@ -1,17 +1,17 @@
 # Graph Report - ENVY  (2026-11-25)
 
 ## Corpus Check
-- 129 files · ~38,243 words
+- 129 files · ~38,569 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 26 file(s) not represented in the graph (top: (none) 19, .css 3, .example 2)
 
 ## Summary
-- 652 nodes · 1399 edges · 35 communities (16 shown, 19 thin omitted)
+- 660 nodes · 1415 edges · 34 communities (16 shown, 18 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 18 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4bff3023`
+- Built from commit: `292ccbba`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -39,7 +39,7 @@
 - Illuminate\Http\JsonResponse
 
 ## God Nodes (most connected - your core abstractions)
-1. `apiRequest()` - 30 edges
+1. `apiRequest()` - 31 edges
 2. `LoadingState()` - 26 edges
 3. `formatPeso()` - 26 edges
 4. `EmptyState()` - 24 edges
@@ -51,21 +51,21 @@
 10. `react-router-dom` - 21 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Storage Approach & Limitations` --references--> `EnsureAdminRole`  [INFERRED]
-  README.md → backend/app/Http/Middleware/EnsureAdminRole.php
-- `Order Lifecycle` --references--> `Order`  [INFERRED]
-  README.md → backend/app/Models/Order.php
-- `Order Lifecycle` --references--> `OrderItem`  [INFERRED]
-  README.md → backend/app/Models/OrderItem.php
-- `Order Lifecycle` --references--> `CheckoutService`  [INFERRED]
-  README.md → backend/app/Services/CheckoutService.php
 - `ENVY — CubeTech Acceptance Test Log` --references--> `AdminCatalogTest`  [INFERRED]
   TEST_LOG.md → backend/tests/Feature/AdminCatalogTest.php
+- `ENVY — CubeTech Acceptance Test Log` --references--> `AdminOrderTest`  [INFERRED]
+  TEST_LOG.md → backend/tests/Feature/AdminOrderTest.php
+- `ENVY — CubeTech Acceptance Test Log` --references--> `CheckoutTest`  [INFERRED]
+  TEST_LOG.md → backend/tests/Feature/CheckoutTest.php
+- `ENVY — CubeTech Acceptance Test Log` --references--> `StorefrontTest`  [INFERRED]
+  TEST_LOG.md → backend/tests/Feature/StorefrontTest.php
+- `Storage Approach & Limitations` --references--> `EnsureAdminRole`  [INFERRED]
+  README.md → backend/app/Http/Middleware/EnsureAdminRole.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (35 total, 19 thin omitted)
+## Communities (34 total, 18 thin omitted)
 
 ### Community 0 - "frontend/package.json"
 Cohesion: 0.06
@@ -84,23 +84,23 @@ Cohesion: 0.07
 Nodes (17): {closure#1}(), {closure#2}(), {closure#3}(), {closure#1}(), {closure#2}(), {closure#1}(), {closure#2}(), {closure#3}() (+9 more)
 
 ### Community 4 - "User"
-Cohesion: 0.09
+Cohesion: 0.11
 Nodes (5): UserRole, Admin, Customer, User, UserFactory
 
 ### Community 5 - "Illuminate\Foundation\Http\FormRequest"
-Cohesion: 0.06
-Nodes (19): EnsureAdminRole, AdminLoginRequest, {closure#1}(), {closure#1}(), UpdateOrderStatusRequest, CheckoutRequest, 1. Backend (`backend/`), 2. Frontend (`frontend/`) (+11 more)
+Cohesion: 0.09
+Nodes (8): EnsureAdminRole, AdminLoginRequest, {closure#1}(), {closure#1}(), SaveProductRequest, UpdateOrderStatusRequest, CheckoutRequest, Storage Approach & Limitations
 
 ### Community 6 - "CheckoutService.php"
-Cohesion: 0.07
-Nodes (11): CheckoutConflictException, CheckoutController, Category, Order, OrderItem, Product, CheckoutService, {closure#1}() (+3 more)
+Cohesion: 0.05
+Nodes (22): CheckoutController, Category, Order, OrderItem, Product, CheckoutService, {closure#1}(), 1. Backend (`backend/`) (+14 more)
 
 ### Community 7 - "User Scenarios & Testing *(mandatory)*"
 Cohesion: 0.13
 Nodes (14): Assumptions & Out of Scope, Edge Cases, Feature Specification: ENVY E-Commerce Website & Admin Dashboard, Functional Requirements, Key Entities, Measurable Outcomes (Mapped to CubeTech Acceptance Checks 01–10), Requirements *(mandatory)*, Success Criteria *(mandatory)* (+6 more)
 
 ### Community 8 - "App.jsx"
-Cohesion: 0.10
+Cohesion: 0.11
 Nodes (57): App(), StorefrontShell(), AdminLayout(), NAV_ITEMS, EnvyPixelMark(), Footer(), Navbar(), OrderStatusBadge() (+49 more)
 
 ### Community 9 - "ENVY E-Commerce — Clean Architecture & Engineering Rules"
@@ -117,24 +117,24 @@ Nodes (4): PaymentMethod, BankTransfer, CashOnDelivery, EWallet
 
 ### Community 27 - "apiRequest"
 Cohesion: 0.13
-Nodes (31): API_BASE_URL, CUSTOMER_TOKEN_STORAGE_KEY, DEMO_ADMIN_STORAGE_KEY, adminLogin(), adminLogout(), createAdminCategory(), createAdminProduct(), deleteAdminCategory() (+23 more)
+Nodes (32): API_BASE_URL, CUSTOMER_TOKEN_STORAGE_KEY, DEMO_ADMIN_STORAGE_KEY, adminLogin(), adminLogout(), createAdminCategory(), createAdminProduct(), deleteAdminCategory() (+24 more)
 
 ### Community 30 - "React + Vite"
 Cohesion: 0.50
 Nodes (3): Expanding the ESLint configuration, React Compiler, React + Vite
 
 ### Community 31 - "OrderStatus"
-Cohesion: 0.18
-Nodes (7): OrderStatus, Cancelled, Completed, Confirmed, Pending, Preparing, Shipped
+Cohesion: 0.10
+Nodes (12): OrderStatus, Cancelled, Completed, Confirmed, Pending, Preparing, Shipped, CheckoutConflictException (+4 more)
 
 ### Community 35 - "Illuminate\Http\JsonResponse"
-Cohesion: 0.05
-Nodes (18): InvalidOrderTransitionException, AdminAuthController, AdminCategoryController, AdminOrderController, AdminOverviewController, AdminProductController, AuthController, CategoryController (+10 more)
+Cohesion: 0.07
+Nodes (13): AdminAuthController, AdminCategoryController, AdminOverviewController, AdminProductController, AuthController, CategoryController, CustomerOrderController, ProductController (+5 more)
 
 ## Knowledge Gaps
 - **11 isolated node(s):** `BankTransfer`, `CashOnDelivery`, `EWallet`, `Cancelled`, `Completed` (+6 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 212 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **19 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 213 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -144,8 +144,8 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `BankTransfer`, `CashOnDelivery`, `EWallet` to the rest of the system?**
   _11 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `frontend/package.json` be split into smaller, more focused modules?**
-  _Cohesion score 0.061979648473635525 - nodes in this community are weakly interconnected._
-- **Why does `ENVY — Athletic & Streetwear E-Commerce Store` connect `Illuminate\Foundation\Http\FormRequest` to `CheckoutService.php`?**
+  _Cohesion score 0.058673469387755105 - nodes in this community are weakly interconnected._
+- **Why does `ENVY — Athletic & Streetwear E-Commerce Store` connect `CheckoutService.php` to `Illuminate\Foundation\Http\FormRequest`?**
   _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Should `composer.json` be split into smaller, more focused modules?**
   _Cohesion score 0.04081632653061224 - nodes in this community are weakly interconnected._

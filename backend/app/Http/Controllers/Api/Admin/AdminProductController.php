@@ -7,7 +7,9 @@ use App\Http\Requests\Admin\SaveProductRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AdminProductController extends Controller
 {
@@ -68,6 +70,32 @@ class AdminProductController extends Controller
         $product->delete();
 
         return response()->json(['message' => 'Product deleted.']);
+    }
+
+    public function uploadImage(Request $request): JsonResponse
+    {
+        $request->validate([
+            'image' => ['required', 'file', 'mimes:jpg,jpeg,png,webp,gif,svg', 'max:5120'],
+        ]);
+
+        $path = $request->file('image')->store('products', 'public');
+
+        return response()->json([
+            'url' => url('/api/uploads/products/' . basename($path)),
+        ], 201);
+    }
+
+    public function serveImage(string $filename): StreamedResponse
+    {
+        $path = "products/{$filename}";
+        if (! Storage::disk('public')->exists($path)) {
+            abort(404);
+        }
+
+        return Storage::disk('public')->response($path, null, [
+            'Content-Security-Policy' => "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+            'Cache-Control' => 'public, max-age=86400',
+        ]);
     }
 
     private function uniqueSlug(string $name, ?int $ignoreId = null): string

@@ -41,6 +41,16 @@ export function createAdminProduct(payload) {
   });
 }
 
+export function uploadAdminProductImage(file) {
+  const formData = new FormData();
+  formData.append('image', file);
+  return apiRequest('/admin/products/image', {
+    method: 'POST',
+    body: formData,
+    auth: true,
+  });
+}
+
 export function updateAdminProduct(id, payload) {
   return apiRequest(`/admin/products/${id}`, {
     method: 'PUT',

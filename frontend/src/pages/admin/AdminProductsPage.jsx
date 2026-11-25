@@ -1,4 +1,4 @@
-import { Pencil, Plus, Search, Trash2, X } from 'lucide-react';
+import { Pencil, Plus, Search, Trash2, Upload, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { EmptyState, ErrorState, LoadingState } from '../../components/ui/StateFeedback';
 import {
@@ -7,6 +7,7 @@ import {
   fetchAdminCategories,
   fetchAdminProducts,
   updateAdminProduct,
+  uploadAdminProductImage,
 } from '../../data/api/admin.api';
 import { useAsyncData } from '../../hooks/useAsyncData';
 import { formatPeso } from '../../utils/money';
@@ -30,6 +31,8 @@ export function AdminProductsPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
   const [formError, setFormError] = useState('');
   const [saving, setSaving] = useState(false);
 
@@ -52,6 +55,8 @@ export function AdminProductsPage() {
   const openCreate = () => {
     setEditingProduct(null);
     setForm({ ...EMPTY_FORM, category_id: categories[0]?.id ? String(categories[0].id) : '' });
+    setImageFile(null);
+    setImagePreview('');
     setFormError('');
     setModalOpen(true);
   };
@@ -67,8 +72,28 @@ export function AdminProductsPage() {
       image_url: p.image_url || '',
       is_active: Boolean(p.is_active),
     });
+    setImageFile(null);
+    setImagePreview(p.image_url || '');
     setFormError('');
     setModalOpen(true);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      setFormError('Image must be 5MB or smaller.');
+      return;
+    }
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+    setFormError('');
+  };
+
+  const handleClearImage = () => {
+    setImageFile(null);
+    setImagePreview('');
+    setForm({ ...form, image_url: '' });
   };
 
   const handleSave = async (e) => {
@@ -92,13 +117,19 @@ export function AdminProductsPage() {
 
     setSaving(true);
     try {
+      let imageUrl = form.image_url.trim() || null;
+      if (imageFile) {
+        const uploaded = await uploadAdminProductImage(imageFile);
+        imageUrl = uploaded.url;
+      }
+
       const payload = {
         category_id: Number(form.category_id),
         name: form.name.trim(),
         description: form.description.trim() || null,
         price,
         stock_quantity: stock,
-        image_url: form.image_url.trim() || null,
+        image_url: imageUrl,
         is_active: Boolean(form.is_active),
       };
 
@@ -406,14 +437,46 @@ export function AdminProductsPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase text-slate-600">Image URL</label>
-                <input
-                  type="url"
-                  value={form.image_url}
-                  onChange={(e) => setForm({ ...form, image_url: e.target.value })}
-                  placeholder="https://..."
-                  className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-slate-950 focus:outline-none"
-                />
+                <label className="block text-xs font-bold uppercase text-slate-600">
+                  Product Image
+                </label>
+                <div className="mt-1 space-y-2 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3">
+                  {imagePreview && (
+                    <div className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-2">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <img
+                          src={imagePreview}
+                          alt="Product preview"
+                          className="h-12 w-12 shrink-0 rounded-lg bg-slate-100 object-cover"
+                        />
+                        <span className="truncate text-xs font-medium text-slate-700">
+                          {imageFile ? imageFile.name : 'Current product image'}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleClearImage}
+                        className="shrink-0 cursor-pointer rounded-lg px-2 py-1 text-xs font-semibold text-red-600 hover:bg-red-50"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  )}
+
+                  <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 transition hover:border-slate-950 hover:text-slate-950">
+                    <Upload className="h-4 w-4" />
+                    <span>{imagePreview ? 'Change Image' : 'Upload Image'}</span>
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                      onChange={handleImageChange}
+                      className="sr-only"
+                    />
+                  </label>
+                  <p className="text-center text-[11px] text-slate-500">
+                    PNG, JPG, WEBP, GIF, or SVG (max 5MB)
+                  </p>
+                </div>
               </div>
 
               <div>

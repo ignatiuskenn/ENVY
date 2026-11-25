@@ -168,9 +168,9 @@
     "semantic_hash": "1a03818ea91deb4f3989c6c994e5867c"
   },
   "backend/routes/api.php": {
-    "mtime": 1794990732.58672,
-    "seen": 1794990779.7742696,
-    "ast_hash": "3643c6201c64a0de211e8745a3f6521e",
+    "mtime": 1795621310.085843,
+    "seen": 1795621452.650421,
+    "ast_hash": "89d2e6e0aa4fddfcc2b3848e064aa5e9",
     "semantic_hash": ""
   },
   "backend/routes/console.php": {
@@ -378,9 +378,9 @@
     "semantic_hash": ""
   },
   "frontend/src/data/api/client.js": {
-    "mtime": 1794987155.782493,
-    "seen": 1794988005.3160374,
-    "ast_hash": "d0a5cc1f7bca6951226ad01b05074ac1",
+    "mtime": 1795621316.0160806,
+    "seen": 1795621452.6505105,
+    "ast_hash": "52c0ad29bf2ed790b1b32963e5d96cfa",
     "semantic_hash": ""
   },
   ".agents/rules/clean-architecture.md": {
@@ -576,9 +576,9 @@
     "semantic_hash": ""
   },
   "backend/app/Http/Controllers/Api/Admin/AdminProductController.php": {
-    "mtime": 1794990728.0489197,
-    "seen": 1794990779.774129,
-    "ast_hash": "fe51b4a51a796fbcf88ed0d4ade0f588",
+    "mtime": 1795621306.1175742,
+    "seen": 1795621452.650277,
+    "ast_hash": "9fb82be7ebaf48d5365d6046a4cfd5ec",
     "semantic_hash": ""
   },
   "backend/app/Http/Requests/Admin/AdminLoginRequest.php": {
@@ -624,9 +624,9 @@
     "semantic_hash": ""
   },
   "backend/tests/Feature/AdminCatalogTest.php": {
-    "mtime": 1795619653.5442858,
-    "seen": 1795619825.5528922,
-    "ast_hash": "14a8645d7bccab7d14871966d2df99e2",
+    "mtime": 1795621313.9970572,
+    "seen": 1795621452.650432,
+    "ast_hash": "ed4d6f3c161eb0bf7fcd4d1ca538db04",
     "semantic_hash": ""
   },
   "backend/tests/Feature/AdminOrderTest.php": {
@@ -654,9 +654,9 @@
     "semantic_hash": ""
   },
   "frontend/src/data/api/admin.api.js": {
-    "mtime": 1794984775.5026462,
-    "seen": 1794985284.9210992,
-    "ast_hash": "55196854eccfc5b48e099bbdbd797cfd",
+    "mtime": 1795621317.7729006,
+    "seen": 1795621452.6505053,
+    "ast_hash": "05810ee6953d6d7e3918e6f854aaf53e",
     "semantic_hash": ""
   },
   "frontend/src/data/context/AdminAuthContext.jsx": {
@@ -708,9 +708,9 @@
     "semantic_hash": ""
   },
   "frontend/src/pages/admin/AdminProductsPage.jsx": {
-    "mtime": 1794984775.5107925,
-    "seen": 1794985284.9211223,
-    "ast_hash": "e8232dd0b39fc803da157fb8326962b9",
+    "mtime": 1795621322.6936963,
+    "seen": 1795621452.6505525,
+    "ast_hash": "4e14b93d6f89e6c2eece268a90ddd420",
     "semantic_hash": ""
   },
   "backend/app/Enums/UserRole.php": {
