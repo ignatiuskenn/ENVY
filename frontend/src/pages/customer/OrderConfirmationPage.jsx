@@ -16,7 +16,7 @@ export function OrderConfirmationPage() {
           action={
             <Link
               to="/products"
-              className="rounded-lg bg-neutral-950 px-5 py-2.5 text-sm font-semibold text-white hover:bg-neutral-800"
+              className="rounded-sm bg-[#24FF6A] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] hover:bg-[#4dff88]"
             >
               Shop Products
             </Link>
@@ -28,71 +28,71 @@ export function OrderConfirmationPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="flex items-center gap-3">
-          <CheckCircle2 className="h-9 w-9 text-emerald-600" />
+      <div className="rounded-lg border border-[#262E36] bg-[#171C21] p-6 sm:p-8">
+        <div className="flex flex-wrap items-center gap-3">
+          <CheckCircle2 className="h-9 w-9 text-[#24FF6A]" />
           <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-emerald-700">
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#24FF6A]">
               Order Placed
             </p>
-            <h1 className="text-2xl font-black text-neutral-950">
+            <h1 className="font-mono text-2xl font-black text-[#F3F6F8]">
               {order.order_number}
             </h1>
           </div>
-          <span className="ml-auto rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800">
+          <span className="ml-auto rounded-xs bg-amber-400/15 px-3 py-1 font-mono text-xs font-bold text-amber-300 border border-amber-400/30">
             {order.status}
           </span>
         </div>
 
-        <div className="mt-6 grid gap-4 rounded-xl bg-neutral-50 p-4 text-sm sm:grid-cols-2">
+        <div className="mt-6 grid gap-4 rounded-md border border-[#262E36] bg-[#111518] p-4 text-sm sm:grid-cols-2">
           <div>
-            <p className="text-xs font-semibold uppercase text-neutral-500">Customer</p>
-            <p className="mt-1 font-semibold text-neutral-900">{order.customer_name}</p>
-            <p className="text-neutral-600">{order.customer_email}</p>
-            <p className="text-neutral-600">{order.customer_contact}</p>
+            <p className="font-mono text-xs font-semibold uppercase text-[#8A99AD]">Customer</p>
+            <p className="mt-1 font-semibold text-[#F3F6F8]">{order.customer_name}</p>
+            <p className="text-[#8A99AD]">{order.customer_email}</p>
+            <p className="text-[#8A99AD]">{order.customer_contact}</p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase text-neutral-500">Delivery & Payment</p>
-            <p className="mt-1 text-neutral-900">{order.delivery_address}</p>
-            <p className="mt-1 font-semibold text-neutral-900">{order.payment_method}</p>
+            <p className="font-mono text-xs font-semibold uppercase text-[#8A99AD]">Delivery & Payment</p>
+            <p className="mt-1 text-[#F3F6F8]">{order.delivery_address}</p>
+            <p className="mt-1 font-semibold text-[#24FF6A]">{order.payment_method}</p>
             {order.order_notes && (
-              <p className="mt-1 text-xs text-neutral-600">Notes: {order.order_notes}</p>
+              <p className="mt-1 text-xs text-[#8A99AD]">Notes: {order.order_notes}</p>
             )}
           </div>
         </div>
 
-        <h2 className="mt-6 text-sm font-bold uppercase tracking-wide text-neutral-700">
+        <h2 className="mt-6 font-mono text-xs font-bold uppercase tracking-wider text-[#8A99AD]">
           Item Summary
         </h2>
-        <ul className="mt-3 divide-y divide-neutral-200 text-sm">
+        <ul className="mt-3 divide-y divide-[#262E36] text-sm">
           {(order.items || []).map((item) => (
             <li key={item.id} className="flex justify-between py-2.5">
-              <span>
+              <span className="text-[#F3F6F8]">
                 {item.product_name_snapshot}{' '}
-                <span className="text-neutral-500">
+                <span className="font-mono text-xs text-[#8A99AD]">
                   ({item.quantity} × {formatPeso(item.unit_price_snapshot)})
                 </span>
               </span>
-              <span className="font-bold text-neutral-900">{formatPeso(item.line_total)}</span>
+              <span className="font-mono font-bold text-[#F3F6F8]">{formatPeso(item.line_total)}</span>
             </li>
           ))}
         </ul>
 
-        <div className="mt-4 flex justify-between border-t border-neutral-200 pt-4 text-base font-black text-neutral-950">
+        <div className="mt-4 flex justify-between border-t border-[#262E36] pt-4 font-mono text-base font-black text-[#F3F6F8]">
           <span>Total</span>
-          <span>{formatPeso(order.total)}</span>
+          <span className="text-[#24FF6A]">{formatPeso(order.total)}</span>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             to="/orders"
-            className="rounded-xl bg-neutral-950 px-5 py-2.5 text-sm font-bold text-white hover:bg-neutral-800"
+            className="rounded-sm bg-[#24FF6A] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] hover:bg-[#4dff88]"
           >
             Track My Orders
           </Link>
           <Link
             to="/products"
-            className="rounded-xl border border-neutral-300 px-5 py-2.5 text-sm font-semibold text-neutral-800 hover:border-neutral-950"
+            className="rounded-sm border border-[#262E36] bg-[#111518] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#F3F6F8] hover:border-[#24FF6A]"
           >
             Continue Shopping
           </Link>

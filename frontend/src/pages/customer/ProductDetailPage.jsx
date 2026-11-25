@@ -55,7 +55,7 @@ export function ProductDetailPage() {
           action={
             <Link
               to="/products"
-              className="rounded-lg bg-neutral-950 px-5 py-2.5 text-sm font-semibold text-white hover:bg-neutral-800"
+              className="rounded-sm bg-[#24FF6A] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] hover:bg-[#4dff88]"
             >
               Back to Shop
             </Link>
@@ -79,14 +79,14 @@ export function ProductDetailPage() {
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <Link
         to="/products"
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-600 hover:text-neutral-950"
+        className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#8A99AD] hover:text-[#24FF6A]"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Products
       </Link>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-2">
-        <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100">
+        <div className="relative overflow-hidden rounded-lg border border-[#262E36] bg-[#171C21]">
           {product.image_url ? (
             <img
               src={product.image_url}
@@ -94,46 +94,49 @@ export function ProductDetailPage() {
               className="aspect-square w-full object-cover"
             />
           ) : (
-            <div className="flex aspect-square items-center justify-center text-sm text-neutral-400">
+            <div className="flex aspect-square items-center justify-center font-mono text-sm text-[#8A99AD]">
               No Image
             </div>
           )}
+          <span className="absolute left-4 top-4 rounded-xs border border-[#24FF6A]/40 bg-[#0B0E11]/90 px-2.5 py-1 font-mono text-xs font-black text-[#24FF6A]">
+            EV-{String(product.id).padStart(2, '0')}
+          </span>
         </div>
 
         <div className="flex flex-col">
-          <span className="text-xs font-bold uppercase tracking-wider text-neutral-500">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#8A99AD]">
             {product.category?.name || 'Apparel'}
           </span>
-          <h1 className="mt-2 text-3xl font-black tracking-tight text-neutral-950">
+          <h1 className="mt-2 text-3xl font-black tracking-tight text-[#F3F6F8]">
             {product.name}
           </h1>
-          <p className="mt-3 text-2xl font-extrabold text-neutral-900">
+          <p className="mt-3 font-mono text-2xl font-extrabold text-[#24FF6A]">
             {formatPeso(product.price)}
           </p>
 
           <div className="mt-3">
             {isOutOfStock ? (
-              <span className="inline-block rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">
+              <span className="inline-block rounded-xs bg-red-600 px-3 py-1 font-mono text-xs font-bold uppercase text-white">
                 Out of Stock
               </span>
             ) : (
-              <span className="inline-block rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
+              <span className="inline-block rounded-xs border border-[#24FF6A]/40 bg-[#24FF6A]/10 px-3 py-1 font-mono text-xs font-bold text-[#24FF6A]">
                 {product.stock_quantity} available in stock
               </span>
             )}
           </div>
 
-          <p className="mt-5 text-sm leading-relaxed text-neutral-700">
+          <p className="mt-5 text-sm leading-relaxed text-[#8A99AD]">
             {product.description || 'No description provided.'}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <div className="flex items-center rounded-lg border border-neutral-300">
+            <div className="flex items-center rounded-sm border border-[#262E36] bg-[#171C21]">
               <button
                 type="button"
                 disabled={isOutOfStock || quantity <= 1}
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="px-3 py-2 text-sm font-bold text-neutral-700 disabled:opacity-40"
+                className="cursor-pointer px-3 py-2.5 text-sm font-bold text-[#F3F6F8] disabled:opacity-40"
               >
                 -
               </button>
@@ -150,13 +153,13 @@ export function ProductDetailPage() {
                   }
                 }}
                 aria-label="Quantity"
-                className="w-14 border-x border-neutral-300 py-2 text-center text-sm font-semibold focus:outline-none"
+                className="w-14 border-x border-[#262E36] bg-[#111518] py-2.5 text-center font-mono text-sm font-semibold text-[#F3F6F8] focus:outline-none"
               />
               <button
                 type="button"
                 disabled={isOutOfStock || quantity >= product.stock_quantity}
                 onClick={() => setQuantity((q) => Math.min(product.stock_quantity, q + 1))}
-                className="px-3 py-2 text-sm font-bold text-neutral-700 disabled:opacity-40"
+                className="cursor-pointer px-3 py-2.5 text-sm font-bold text-[#F3F6F8] disabled:opacity-40"
               >
                 +
               </button>
@@ -166,7 +169,7 @@ export function ProductDetailPage() {
               type="button"
               disabled={isOutOfStock}
               onClick={() => handleAdd(product, quantity)}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-neutral-950 px-6 py-3 text-sm font-bold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-500"
+              className="inline-flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm bg-[#24FF6A] px-6 py-3 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] transition hover:bg-[#4dff88] disabled:cursor-not-allowed disabled:bg-[#262E36] disabled:text-[#8A99AD]"
             >
               <ShoppingBag className="h-4 w-4" />
               {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
@@ -174,7 +177,7 @@ export function ProductDetailPage() {
           </div>
 
           {feedback && (
-            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+            <div className="mt-4 rounded-md border border-[#24FF6A]/50 bg-[#24FF6A]/10 px-4 py-3 font-mono text-xs font-semibold text-[#24FF6A]">
               {feedback}
             </div>
           )}
@@ -182,8 +185,8 @@ export function ProductDetailPage() {
       </div>
 
       {related.length > 0 && (
-        <section className="mt-16 border-t border-neutral-200 pt-10">
-          <h2 className="text-xl font-black tracking-tight text-neutral-950">
+        <section className="mt-16 border-t border-[#262E36] pt-10">
+          <h2 className="font-mono text-lg font-black uppercase tracking-wider text-[#F3F6F8]">
             Related in {product.category?.name}
           </h2>
           <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

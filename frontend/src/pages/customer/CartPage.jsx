@@ -17,7 +17,7 @@ export function CartPage() {
           action={
             <Link
               to="/products"
-              className="rounded-lg bg-neutral-950 px-5 py-2.5 text-sm font-semibold text-white hover:bg-neutral-800"
+              className="rounded-sm bg-[#24FF6A] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] hover:bg-[#4dff88]"
             >
               Browse Products
             </Link>
@@ -29,7 +29,9 @@ export function CartPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-black tracking-tight text-neutral-950">Shopping Cart</h1>
+      <h1 className="font-mono text-2xl font-black uppercase tracking-wider text-[#F3F6F8] sm:text-3xl">
+        Shopping Cart
+      </h1>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-3">
         <div className="space-y-4 lg:col-span-2">
@@ -38,10 +40,10 @@ export function CartPage() {
             return (
               <div
                 key={item.product_id}
-                className="flex flex-col gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between"
+                className="flex flex-col gap-4 rounded-lg border border-[#262E36] bg-[#171C21] p-4 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="flex items-center gap-4">
-                  <div className="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-neutral-100">
+                  <div className="h-20 w-20 shrink-0 overflow-hidden rounded-sm border border-[#262E36] bg-[#111518]">
                     {item.image_url ? (
                       <img
                         src={item.image_url}
@@ -53,26 +55,26 @@ export function CartPage() {
                   <div>
                     <Link
                       to={`/products/${item.product_id}`}
-                      className="text-base font-bold text-neutral-950 hover:underline"
+                      className="text-base font-bold text-[#F3F6F8] hover:text-[#24FF6A]"
                     >
                       {item.name}
                     </Link>
-                    <p className="mt-0.5 text-sm text-neutral-600">
+                    <p className="mt-0.5 font-mono text-xs text-[#8A99AD]">
                       Unit: {formatPeso(item.price)}
                     </p>
-                    <p className="text-xs text-neutral-500">
+                    <p className="font-mono text-[11px] text-[#8A99AD]">
                       Max stock: {item.stock_quantity}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-4 sm:justify-end">
-                  <div className="flex items-center rounded-lg border border-neutral-300">
+                  <div className="flex items-center rounded-sm border border-[#262E36] bg-[#111518]">
                     <button
                       type="button"
                       onClick={() => updateQuantity(item.product_id, item.quantity - 1)}
                       disabled={item.quantity <= 1}
-                      className="px-2.5 py-1.5 text-sm font-bold text-neutral-700 disabled:opacity-40"
+                      className="cursor-pointer px-2.5 py-1.5 text-sm font-bold text-[#F3F6F8] disabled:opacity-40"
                     >
                       -
                     </button>
@@ -83,19 +85,19 @@ export function CartPage() {
                       value={item.quantity}
                       onChange={(e) => updateQuantity(item.product_id, e.target.value)}
                       aria-label={`Quantity for ${item.name}`}
-                      className="w-12 border-x border-neutral-300 py-1.5 text-center text-sm font-semibold focus:outline-none"
+                      className="w-12 border-x border-[#262E36] bg-[#111518] py-1.5 text-center font-mono text-sm font-semibold text-[#F3F6F8] focus:outline-none"
                     />
                     <button
                       type="button"
                       onClick={() => updateQuantity(item.product_id, item.quantity + 1)}
                       disabled={item.quantity >= item.stock_quantity}
-                      className="px-2.5 py-1.5 text-sm font-bold text-neutral-700 disabled:opacity-40"
+                      className="cursor-pointer px-2.5 py-1.5 text-sm font-bold text-[#F3F6F8] disabled:opacity-40"
                     >
                       +
                     </button>
                   </div>
 
-                  <p className="min-w-28 text-right text-sm font-extrabold text-neutral-950">
+                  <p className="min-w-28 text-right font-mono text-sm font-extrabold text-[#24FF6A]">
                     {formatPeso(lineTotal)}
                   </p>
 
@@ -103,7 +105,7 @@ export function CartPage() {
                     type="button"
                     onClick={() => removeItem(item.product_id)}
                     aria-label={`Remove ${item.name}`}
-                    className="rounded-lg p-2 text-neutral-500 hover:bg-red-50 hover:text-red-600"
+                    className="cursor-pointer rounded-sm p-2 text-[#8A99AD] hover:bg-red-950/50 hover:text-red-400"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -113,27 +115,29 @@ export function CartPage() {
           })}
         </div>
 
-        <aside className="h-fit rounded-2xl border border-neutral-200 bg-neutral-50 p-6">
-          <h2 className="text-lg font-black text-neutral-950">Order Summary</h2>
-          <div className="mt-4 space-y-2 border-b border-neutral-200 pb-4 text-sm">
-            <div className="flex justify-between text-neutral-600">
+        <aside className="h-fit rounded-lg border border-[#262E36] bg-[#171C21] p-6">
+          <h2 className="font-mono text-base font-black uppercase tracking-wider text-[#F3F6F8]">
+            Order Summary
+          </h2>
+          <div className="mt-4 space-y-2 border-b border-[#262E36] pb-4 text-sm">
+            <div className="flex justify-between text-[#8A99AD]">
               <span>Subtotal</span>
-              <span className="font-semibold text-neutral-900">{formatPeso(subtotal)}</span>
+              <span className="font-mono font-semibold text-[#F3F6F8]">{formatPeso(subtotal)}</span>
             </div>
-            <div className="flex justify-between text-neutral-600">
+            <div className="flex justify-between text-[#8A99AD]">
               <span>Shipping / Fees</span>
-              <span>PHP 0.00</span>
+              <span className="font-mono">PHP 0.00</span>
             </div>
           </div>
-          <div className="mt-4 flex justify-between text-base font-black text-neutral-950">
+          <div className="mt-4 flex justify-between font-mono text-base font-black text-[#F3F6F8]">
             <span>Total</span>
-            <span>{formatPeso(total)}</span>
+            <span className="text-[#24FF6A]">{formatPeso(total)}</span>
           </div>
 
           <button
             type="button"
             onClick={() => navigate('/checkout')}
-            className="mt-6 w-full rounded-xl bg-neutral-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-neutral-800"
+            className="mt-6 w-full cursor-pointer rounded-sm bg-[#24FF6A] px-5 py-3 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] transition hover:bg-[#4dff88]"
           >
             Proceed to Checkout
           </button>

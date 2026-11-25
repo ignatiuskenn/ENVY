@@ -6,8 +6,11 @@ export function ProductCard({ product, onAddToCart }) {
   const isOutOfStock = product.stock_quantity <= 0;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition hover:shadow-md">
-      <Link to={`/products/${product.id}`} className="relative aspect-[4/3] overflow-hidden bg-neutral-100">
+    <article className="group flex flex-col overflow-hidden rounded-lg border border-[#262E36] bg-[#171C21] transition hover:border-[#24FF6A]/65">
+      <Link
+        to={`/products/${product.id}`}
+        className="relative aspect-[4/3] overflow-hidden bg-[#111518]"
+      >
         {product.image_url ? (
           <img
             src={product.image_url}
@@ -16,13 +19,17 @@ export function ProductCard({ product, onAddToCart }) {
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-xs font-medium text-neutral-400">
+          <div className="flex h-full items-center justify-center font-mono text-xs uppercase text-[#8A99AD]">
             No Image
           </div>
         )}
 
+        <span className="absolute left-3 top-3 rounded-xs bg-[#0B0E11]/90 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-[#24FF6A] border border-[#24FF6A]/40">
+          EV-{String(product.id).padStart(2, '0')}
+        </span>
+
         {isOutOfStock && (
-          <span className="absolute left-3 top-3 rounded-full bg-red-600 px-2.5 py-1 text-xs font-bold text-white">
+          <span className="absolute right-3 top-3 rounded-xs bg-red-600 px-2 py-0.5 font-mono text-[10px] font-bold uppercase text-white">
             Out of Stock
           </span>
         )}
@@ -30,12 +37,12 @@ export function ProductCard({ product, onAddToCart }) {
 
       <div className="flex flex-1 flex-col p-4">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#8A99AD]">
             {product.category?.name || 'Apparel'}
           </span>
           <span
-            className={`text-xs font-medium ${
-              isOutOfStock ? 'text-red-600' : 'text-emerald-700'
+            className={`font-mono text-[11px] font-semibold ${
+              isOutOfStock ? 'text-red-400' : 'text-[#24FF6A]'
             }`}
           >
             {isOutOfStock ? 'Out of Stock' : `${product.stock_quantity} in stock`}
@@ -44,19 +51,19 @@ export function ProductCard({ product, onAddToCart }) {
 
         <Link
           to={`/products/${product.id}`}
-          className="mt-1.5 text-base font-bold text-neutral-950 hover:underline"
+          className="mt-1.5 text-base font-bold text-[#F3F6F8] hover:text-[#24FF6A]"
         >
           {product.name}
         </Link>
 
-        <p className="mt-1 text-base font-extrabold text-neutral-900">
+        <p className="mt-1 font-mono text-sm font-extrabold text-[#F3F6F8]">
           {formatPeso(product.price)}
         </p>
 
         <div className="mt-auto flex items-center gap-2 pt-4">
           <Link
             to={`/products/${product.id}`}
-            className="flex-1 rounded-lg border border-neutral-300 px-3 py-2 text-center text-xs font-semibold text-neutral-800 transition hover:border-neutral-950"
+            className="flex-1 rounded-sm border border-[#262E36] bg-[#111518] px-3 py-2 text-center font-mono text-[11px] font-bold uppercase tracking-wider text-[#F3F6F8] transition hover:border-[#24FF6A] hover:text-[#24FF6A]"
           >
             View Details
           </Link>
@@ -65,7 +72,7 @@ export function ProductCard({ product, onAddToCart }) {
             type="button"
             disabled={isOutOfStock}
             onClick={() => onAddToCart(product)}
-            className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-neutral-950 px-3 py-2 text-xs font-semibold text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-500"
+            className="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-sm bg-[#24FF6A] px-3 py-2 font-mono text-[11px] font-black uppercase tracking-wider text-[#0B0E11] transition hover:bg-[#4dff88] disabled:cursor-not-allowed disabled:bg-[#262E36] disabled:text-[#8A99AD]"
           >
             <ShoppingBag className="h-3.5 w-3.5" />
             {isOutOfStock ? 'Sold Out' : 'Add to Cart'}

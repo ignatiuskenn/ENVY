@@ -55,21 +55,23 @@ export function ProductsPage() {
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-neutral-950">All Products</h1>
-          <p className="mt-1 text-sm text-neutral-600">
+          <h1 className="font-mono text-2xl font-black uppercase tracking-wider text-[#F3F6F8] sm:text-3xl">
+            All Products
+          </h1>
+          <p className="mt-1 text-sm text-[#8A99AD]">
             Search, filter by category, and sort by price.
           </p>
         </div>
         {!loading && !error && (
-          <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+          <p className="font-mono text-xs font-semibold uppercase tracking-wider text-[#24FF6A]">
             {products.length} item(s)
           </p>
         )}
       </div>
 
-      <div className="mt-6 grid gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid gap-3 rounded-lg border border-[#262E36] bg-[#171C21] p-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="relative lg:col-span-2">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A99AD]" />
           <input
             type="search"
             value={q}
@@ -78,7 +80,7 @@ export function ProductsPage() {
               updateFilter(e.target.value, categoryId, sort);
             }}
             placeholder="Search products by name..."
-            className="w-full rounded-lg border border-neutral-300 bg-white py-2 pl-9 pr-3 text-sm text-neutral-900 focus:border-neutral-950 focus:outline-none"
+            className="w-full rounded-sm border border-[#262E36] bg-[#111518] py-2 pl-9 pr-3 text-sm text-[#F3F6F8] placeholder-[#8A99AD] focus:border-[#24FF6A] focus:outline-none"
           />
         </div>
 
@@ -89,7 +91,7 @@ export function ProductsPage() {
             updateFilter(q, e.target.value, sort);
           }}
           aria-label="Filter by category"
-          className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 focus:border-neutral-950 focus:outline-none"
+          className="w-full rounded-sm border border-[#262E36] bg-[#111518] px-3 py-2 text-sm text-[#F3F6F8] focus:border-[#24FF6A] focus:outline-none"
         >
           <option value="">All Categories</option>
           {categories.map((cat) => (
@@ -106,7 +108,7 @@ export function ProductsPage() {
             updateFilter(q, categoryId, e.target.value);
           }}
           aria-label="Sort by price"
-          className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 focus:border-neutral-950 focus:outline-none"
+          className="w-full rounded-sm border border-[#262E36] bg-[#111518] px-3 py-2 text-sm text-[#F3F6F8] focus:border-[#24FF6A] focus:outline-none"
         >
           <option value="">Sort: Default</option>
           <option value="price_asc">Price: Low to High</option>
@@ -115,7 +117,7 @@ export function ProductsPage() {
       </div>
 
       {feedback && (
-        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+        <div className="mt-4 rounded-md border border-[#24FF6A]/50 bg-[#24FF6A]/10 px-4 py-3 font-mono text-xs font-semibold text-[#24FF6A]">
           {feedback}
         </div>
       )}
@@ -133,7 +135,7 @@ export function ProductsPage() {
               <button
                 type="button"
                 onClick={clearFilters}
-                className="rounded-lg bg-neutral-950 px-4 py-2 text-sm font-semibold text-white hover:bg-neutral-800"
+                className="cursor-pointer rounded-sm bg-[#24FF6A] px-4 py-2 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] hover:bg-[#4dff88]"
               >
                 Reset Filters
               </button>

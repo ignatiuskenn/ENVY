@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductCard } from '../../components/shared/ProductCard';
+import { SpatialGarmentRack } from '../../components/shared/SpatialGarmentRack';
 import { EmptyState, ErrorState, LoadingState } from '../../components/ui/StateFeedback';
 import { fetchCategories, fetchProducts } from '../../data/api/storefront.api';
 import { useCart } from '../../data/context/useCart';
@@ -9,6 +10,7 @@ import { useAsyncData } from '../../hooks/useAsyncData';
 
 export function HomePage() {
   const { addItem } = useCart();
+  const [activeCategoryId, setActiveCategoryId] = useState('');
   const [feedback, setFeedback] = useState('');
 
   const { data, loading, error, retry } = useAsyncData(
@@ -17,7 +19,8 @@ export function HomePage() {
   );
 
   const categories = data?.[0]?.data || [];
-  const featured = (data?.[1]?.data || []).slice(0, 4);
+  const allProducts = data?.[1]?.data || [];
+  const featured = allProducts.slice(0, 4);
 
   const handleAdd = (product) => {
     const res = addItem(product, 1);
@@ -27,58 +30,40 @@ export function HomePage() {
 
   return (
     <div className="space-y-12 pb-16">
-      <section className="bg-neutral-950 text-white">
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-14 sm:px-6 md:grid-cols-2 lg:px-8 lg:py-20">
-          <div>
-            <span className="inline-block rounded-full bg-lime-400 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-neutral-950">
-              New Season Drop
-            </span>
-            <h1 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-              ENGINEERED TO MOVE WITH ENVY.
-            </h1>
-            <p className="mt-4 max-w-lg text-base text-neutral-300">
-              Technical fleece, breathable compression tops, and road-ready footwear built for everyday training and street utility.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                to="/products"
-                className="inline-flex items-center gap-2 rounded-full bg-lime-400 px-6 py-3 text-sm font-bold text-neutral-950 transition hover:bg-lime-300"
-              >
-                Shop Collection
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/cart"
-                className="inline-flex items-center rounded-full border border-neutral-700 px-6 py-3 text-sm font-semibold text-white transition hover:border-white"
-              >
-                View Cart
-              </Link>
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900">
-            <img
-              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=80"
-              alt="ENVY Athletics Training Collection"
-              className="aspect-[16/10] w-full object-cover"
-            />
-          </div>
+      {loading ? (
+        <div className="kalle-studio-grid flex h-[560px] items-center justify-center border-b border-[#262E36] sm:h-[640px]">
+          <LoadingState label="Initializing 3D spatial rack..." />
         </div>
-      </section>
+      ) : error ? (
+        <div className="mx-auto max-w-4xl px-4 pt-10 sm:px-6 lg:px-8">
+          <ErrorState message={error} onRetry={retry} />
+        </div>
+      ) : allProducts.length > 0 ? (
+        <SpatialGarmentRack
+          products={allProducts}
+          categories={categories}
+          activeCategoryId={activeCategoryId}
+          onSelectCategory={setActiveCategoryId}
+          onAddToCart={handleAdd}
+        />
+      ) : null}
 
-      <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
+      <div id="catalog-grid" className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
         {feedback && (
-          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+          <div className="rounded-md border border-[#24FF6A]/50 bg-[#24FF6A]/10 px-4 py-3 font-mono text-xs font-semibold text-[#24FF6A]">
             {feedback}
           </div>
         )}
 
         <section>
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-black tracking-tight text-neutral-950">
+            <h2 className="font-mono text-lg font-black uppercase tracking-wider text-[#F3F6F8]">
               Shop by Category
             </h2>
-            <Link to="/products" className="text-sm font-semibold text-neutral-700 hover:text-neutral-950">
+            <Link
+              to="/products"
+              className="font-mono text-xs font-bold uppercase tracking-wider text-[#8A99AD] hover:text-[#24FF6A]"
+            >
               View all →
             </Link>
           </div>
@@ -87,10 +72,10 @@ export function HomePage() {
               <Link
                 key={cat.id}
                 to={`/products?category_id=${cat.id}`}
-                className="flex items-center justify-between rounded-xl border border-neutral-200 bg-neutral-50 px-5 py-4 text-sm font-bold text-neutral-900 transition hover:border-neutral-950 hover:bg-white"
+                className="flex items-center justify-between rounded-md border border-[#262E36] bg-[#171C21] px-5 py-4 font-mono text-xs font-bold uppercase tracking-wider text-[#F3F6F8] transition hover:border-[#24FF6A] hover:text-[#24FF6A]"
               >
                 <span>{cat.name}</span>
-                <ArrowRight className="h-4 w-4 text-neutral-500" />
+                <ArrowRight className="h-4 w-4 text-[#24FF6A]" />
               </Link>
             ))}
           </div>
@@ -98,10 +83,13 @@ export function HomePage() {
 
         <section>
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-black tracking-tight text-neutral-950">
+            <h2 className="font-mono text-lg font-black uppercase tracking-wider text-[#F3F6F8]">
               Featured Gear
             </h2>
-            <Link to="/products" className="text-sm font-semibold text-neutral-700 hover:text-neutral-950">
+            <Link
+              to="/products"
+              className="font-mono text-xs font-bold uppercase tracking-wider text-[#8A99AD] hover:text-[#24FF6A]"
+            >
               Browse catalog →
             </Link>
           </div>
