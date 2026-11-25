@@ -6,16 +6,16 @@ export function ProductCard({ product, onAddToCart }) {
   const isOutOfStock = product.stock_quantity <= 0;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-lg border border-[#262E36] bg-[#171C21] transition hover:border-[#24FF6A]/65">
+    <article className="group flex flex-col overflow-hidden rounded-lg border border-[#262E36] bg-[#171C21] transition duration-300 hover:-translate-y-1 hover:border-[#24FF6A]/70">
       <Link
         to={`/products/${product.id}`}
-        className="relative aspect-[4/3] overflow-hidden bg-[#111518]"
+        className="relative aspect-[4/3] overflow-hidden bg-[radial-gradient(circle_at_50%_45%,rgba(44,56,68,0.52),rgba(17,21,24,0.96))] p-4"
       >
         {product.image_url ? (
           <img
             src={product.image_url}
             alt={product.name}
-            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+            className="h-full w-full object-contain drop-shadow-[0_14px_18px_rgba(0,0,0,0.65)] transition duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-105"
             loading="lazy"
           />
         ) : (
@@ -24,7 +24,7 @@ export function ProductCard({ product, onAddToCart }) {
           </div>
         )}
 
-        <span className="absolute left-3 top-3 rounded-xs bg-[#0B0E11]/90 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-[#24FF6A] border border-[#24FF6A]/40">
+        <span className="absolute left-3 top-3 rounded-xs border border-[#24FF6A]/40 bg-[#0B0E11]/90 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-[#24FF6A]">
           EV-{String(product.id).padStart(2, '0')}
         </span>
 
@@ -51,7 +51,7 @@ export function ProductCard({ product, onAddToCart }) {
 
         <Link
           to={`/products/${product.id}`}
-          className="mt-1.5 text-base font-bold text-[#F3F6F8] hover:text-[#24FF6A]"
+          className="mt-1.5 text-base font-bold text-[#F3F6F8] transition-colors hover:text-[#24FF6A]"
         >
           {product.name}
         </Link>
@@ -72,7 +72,7 @@ export function ProductCard({ product, onAddToCart }) {
             type="button"
             disabled={isOutOfStock}
             onClick={() => onAddToCart(product)}
-            className="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-sm bg-[#24FF6A] px-3 py-2 font-mono text-[11px] font-black uppercase tracking-wider text-[#0B0E11] transition hover:bg-[#4dff88] disabled:cursor-not-allowed disabled:bg-[#262E36] disabled:text-[#8A99AD]"
+            className="inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-sm bg-[#24FF6A] px-3 py-2 font-mono text-[11px] font-black uppercase tracking-wider text-[#0B0E11] transition hover:bg-[#4dff88] active:scale-95 disabled:cursor-not-allowed disabled:bg-[#262E36] disabled:text-[#8A99AD]"
           >
             <ShoppingBag className="h-3.5 w-3.5" />
             {isOutOfStock ? 'Sold Out' : 'Add to Cart'}

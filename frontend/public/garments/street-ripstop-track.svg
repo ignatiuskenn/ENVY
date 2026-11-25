@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <path d="M152 76 H368 L392 554 L286 554 L260 272 L234 554 L128 554 Z" fill="#1A1F25" stroke="#434D58" stroke-width="2.5" stroke-linejoin="round"/>
+  <rect x="152" y="76" width="216" height="28" fill="#101418" stroke="#434D58" stroke-width="2"/>
+  <!-- Neon Piping Stripes -->
+  <line x1="146" y1="106" x2="128" y2="552" stroke="#24FF6A" stroke-width="6"/>
+  <line x1="374" y1="106" x2="392" y2="552" stroke="#24FF6A" stroke-width="6"/>
+  <!-- Knee Articulation Darts -->
+  <path d="M148 318 L236 334 M284 334 L372 318" stroke="#434D58" stroke-width="3"/>
+  <!-- Ankle Zippers -->
+  <line x1="128" y1="472" x2="128" y2="552" stroke="#F3F6F8" stroke-width="3"/>
+  <line x1="392" y1="472" x2="392" y2="552" stroke="#F3F6F8" stroke-width="3"/>
+</svg>

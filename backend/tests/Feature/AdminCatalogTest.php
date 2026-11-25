@@ -23,7 +23,7 @@ class AdminCatalogTest extends TestCase
     public function test_admin_can_list_filter_create_and_update_products(): void
     {
         $this->actAsAdmin();
-        $tops = Category::where('name', 'Tops & Outerwear')->firstOrFail();
+        $tops = Category::where('name', 'Gorpcore Jackets')->firstOrFail();
 
         // Includes inactive products
         $all = $this->getJson('/api/admin/products');
@@ -57,7 +57,7 @@ class AdminCatalogTest extends TestCase
     public function test_admin_cannot_hard_delete_product_referenced_by_an_order(): void
     {
         $this->actAsAdmin();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail();
 
         $this->postJson('/api/checkout', [
             'customer_name' => 'Test Buyer',
@@ -78,10 +78,10 @@ class AdminCatalogTest extends TestCase
     public function test_admin_category_crud_enforces_case_insensitive_uniqueness_and_blocks_assigned_delete(): void
     {
         $this->actAsAdmin();
-        $tops = Category::where('name', 'Tops & Outerwear')->firstOrFail();
+        $tops = Category::where('name', 'Gorpcore Jackets')->firstOrFail();
 
         // Case-insensitive duplicate rejected
-        $this->postJson('/api/admin/categories', ['name' => 'tops & outerwear'])
+        $this->postJson('/api/admin/categories', ['name' => 'gorpcore jackets'])
             ->assertStatus(422);
 
         // Delete blocked when products exist

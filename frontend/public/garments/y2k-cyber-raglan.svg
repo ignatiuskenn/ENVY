@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="raglanBody" x1="150" y1="90" x2="370" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#272E36"/>
+      <stop offset="100%" stop-color="#14181D"/>
+    </linearGradient>
+  </defs>
+  <!-- Boxy Y2K Raglan Tee Silhouette -->
+  <path d="M196 96 L92 142 L48 272 L126 306 L150 232 L150 536 L370 536 L370 232 L394 306 L472 272 L428 142 L324 96 Q260 124 196 96 Z" fill="url(#raglanBody)" stroke="#444E58" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Contrast Raglan Sleeves -->
+  <path d="M196 96 L92 142 L48 272 L126 306 L150 232 L198 146 Z" fill="#3B4550"/>
+  <path d="M324 96 L428 142 L472 272 L394 306 L370 232 L322 146 Z" fill="#3B4550"/>
+  <!-- Ribbed Collar -->
+  <path d="M192 96 Q260 132 328 96 Q260 110 192 96 Z" fill="#0E1216" stroke="#444E58" stroke-width="2"/>
+  <!-- Y2K Cyber Pixel Chest Graphic -->
+  <rect x="196" y="212" width="16" height="16" fill="#24FF6A"/>
+  <rect x="220" y="212" width="16" height="16" fill="#24FF6A"/>
+  <rect x="208" y="228" width="16" height="16" fill="#24FF6A"/>
+  <path d="M250 220 H326 M250 236 H310" stroke="#F3F6F8" stroke-width="6" stroke-linecap="square"/>
+  <path d="M194 276 Q260 250 326 276" stroke="#24FF6A" stroke-width="3" stroke-dasharray="10 6"/>
+</svg>

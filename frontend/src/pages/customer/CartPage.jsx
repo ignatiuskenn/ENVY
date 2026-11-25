@@ -43,12 +43,12 @@ export function CartPage() {
                 className="flex flex-col gap-4 rounded-lg border border-[#262E36] bg-[#171C21] p-4 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="flex items-center gap-4">
-                  <div className="h-20 w-20 shrink-0 overflow-hidden rounded-sm border border-[#262E36] bg-[#111518]">
+                  <div className="h-20 w-20 shrink-0 overflow-hidden rounded-sm border border-[#262E36] bg-[#111518] p-1.5">
                     {item.image_url ? (
                       <img
                         src={item.image_url}
                         alt={item.name}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-contain"
                       />
                     ) : null}
                   </div>

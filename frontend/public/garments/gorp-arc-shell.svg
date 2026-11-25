@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="shellDark" x1="120" y1="60" x2="400" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#363E47"/>
+      <stop offset="50%" stop-color="#222830"/>
+      <stop offset="100%" stop-color="#14181D"/>
+    </linearGradient>
+  </defs>
+  <!-- Technical Hood -->
+  <path d="M185 112 L198 42 Q260 28 322 42 L335 112 Z" fill="#1B2026" stroke="#444E58" stroke-width="2.5"/>
+  <!-- Jacket Silhouette -->
+  <path d="M185 106 L112 134 L54 326 L44 468 L108 476 L142 308 L145 538 L375 538 L378 308 L412 476 L476 468 L466 326 L408 134 L335 106 Z" fill="url(#shellDark)" stroke="#444E58" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Articulated Seam Tape -->
+  <path d="M112 134 L165 215 L165 536 M408 134 L355 215 L355 536" stroke="#111518" stroke-width="4"/>
+  <!-- Center Storm Placket -->
+  <rect x="252" y="106" width="16" height="432" fill="#111518"/>
+  <line x1="260" y1="106" x2="260" y2="538" stroke="#39434D" stroke-width="2" stroke-dasharray="6 4"/>
+  <!-- Dual Gorpcore Bellow Chest Pockets -->
+  <rect x="174" y="210" width="66" height="86" rx="4" fill="#2A313A" stroke="#4D5763" stroke-width="2"/>
+  <rect x="174" y="210" width="66" height="20" rx="2" fill="#181D22"/>
+  <rect x="280" y="210" width="66" height="86" rx="4" fill="#2A313A" stroke="#4D5763" stroke-width="2"/>
+  <rect x="280" y="210" width="66" height="20" rx="2" fill="#181D22"/>
+  <!-- Lower Cargo Pockets -->
+  <rect x="166" y="348" width="76" height="106" rx="4" fill="#252B33" stroke="#4D5763" stroke-width="2"/>
+  <rect x="278" y="348" width="76" height="106" rx="4" fill="#252B33" stroke="#4D5763" stroke-width="2"/>
+  <!-- High Collar & Velcro Cuffs -->
+  <path d="M185 106 L198 70 Q260 60 322 70 L335 106 Q260 122 185 106 Z" fill="#283038" stroke="#4D5763" stroke-width="2"/>
+  <rect x="44" y="458" width="66" height="14" rx="3" transform="rotate(8 44 458)" fill="#111518"/>
+  <rect x="410" y="467" width="66" height="14" rx="3" transform="rotate(-8 410 467)" fill="#111518"/>
+  <!-- Technical Micro Tag -->
+  <rect x="182" y="216" width="18" height="5" fill="#24FF6A"/>
+</svg>

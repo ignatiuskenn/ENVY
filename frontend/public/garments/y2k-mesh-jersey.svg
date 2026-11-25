@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="jerseyDark" x1="140" y1="90" x2="380" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E252D"/>
+      <stop offset="100%" stop-color="#0E1216"/>
+    </linearGradient>
+  </defs>
+  <path d="M194 94 L94 136 L52 276 L132 306 L152 234 L152 540 L368 540 L368 234 L388 306 L468 276 L426 136 L326 94 Q260 128 194 94 Z" fill="url(#jerseyDark)" stroke="#3D4752" stroke-width="2.5"/>
+  <!-- V-Neck Jersey Trim -->
+  <path d="M194 94 L260 156 L326 94" stroke="#24FF6A" stroke-width="8" stroke-linejoin="round" fill="none"/>
+  <!-- Side Piping -->
+  <path d="M168 210 L168 538 M352 210 L352 538" stroke="#24FF6A" stroke-width="5"/>
+  <!-- Y2K Jersey Number 03 -->
+  <text x="260" y="330" text-anchor="middle" fill="#F3F6F8" font-family="monospace" font-size="112" font-weight="900" letter-spacing="-4">03</text>
+  <text x="260" y="215" text-anchor="middle" fill="#24FF6A" font-family="monospace" font-size="22" font-weight="800" letter-spacing="8">ENVY</text>
+</svg>

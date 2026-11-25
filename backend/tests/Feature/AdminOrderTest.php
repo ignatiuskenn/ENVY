@@ -23,7 +23,7 @@ class AdminOrderTest extends TestCase
     public function test_overview_kpis_and_customer_summary_match_completed_orders_and_normalized_emails(): void
     {
         $this->actAsAdmin();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail(); // 120.00
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail(); // 120.00
 
         // Order 1: Completed (counts toward Total Sales)
         $o1 = $this->postJson('/api/checkout', [
@@ -70,7 +70,7 @@ class AdminOrderTest extends TestCase
     public function test_order_state_machine_restores_stock_once_on_cancel_and_preserves_snapshots(): void
     {
         $this->actAsAdmin();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail(); // stock 40
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail(); // stock 40
 
         $orderRes = $this->postJson('/api/checkout', [
             'customer_name' => 'Jose Rizal',
@@ -106,7 +106,7 @@ class AdminOrderTest extends TestCase
         // Edit product name & price; existing order snapshot must remain unchanged
         $this->putJson("/api/admin/products/{$socks->id}", [
             'category_id' => $socks->category_id,
-            'name' => 'ENVY Crew Socks RENAMED',
+            'name' => 'ENVY Acid-Wash Boxy Tee RENAMED',
             'description' => $socks->description,
             'price' => 999.00,
             'stock_quantity' => 40,
@@ -114,7 +114,7 @@ class AdminOrderTest extends TestCase
         ])->assertOk();
 
         $detail = $this->getJson("/api/admin/orders/{$orderId}")->assertOk();
-        $detail->assertJsonPath('data.items.0.product_name_snapshot', 'ENVY Crew Socks')
+        $detail->assertJsonPath('data.items.0.product_name_snapshot', 'ENVY Acid-Wash Boxy Tee')
             ->assertJsonPath('data.items.0.unit_price_snapshot', '120.00')
             ->assertJsonPath('data.total', '360.00');
     }

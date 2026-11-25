@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="chromeBody" x1="120" y1="70" x2="400" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5F8FA"/>
+      <stop offset="28%" stop-color="#9AA5B1"/>
+      <stop offset="52%" stop-color="#FFFFFF"/>
+      <stop offset="76%" stop-color="#6E7884"/>
+      <stop offset="100%" stop-color="#DDE3E9"/>
+    </linearGradient>
+    <linearGradient id="chromeBaffle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.72"/>
+      <stop offset="55%" stop-color="#7B8591" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#222830" stop-opacity="0.65"/>
+    </linearGradient>
+  </defs>
+  <!-- Left & Right Sleeves + Cropped Torso -->
+  <path d="M185 110 L118 135 L58 315 L50 432 L116 445 L146 310 L152 465 L368 465 L374 310 L404 445 L470 432 L462 315 L402 135 L335 110 Z" fill="url(#chromeBody)" stroke="#39414A" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Puffer Baffle Shading -->
+  <path d="M150 205 Q260 228 370 205" stroke="url(#chromeBaffle)" stroke-width="26" stroke-linecap="round" fill="none"/>
+  <path d="M150 285 Q260 308 370 285" stroke="url(#chromeBaffle)" stroke-width="26" stroke-linecap="round" fill="none"/>
+  <path d="M151 365 Q260 388 369 365" stroke="url(#chromeBaffle)" stroke-width="26" stroke-linecap="round" fill="none"/>
+  <!-- Sleeve Baffles -->
+  <path d="M105 190 L144 205 M86 258 L134 272 M68 330 L122 344" stroke="#39414A" stroke-width="4" stroke-opacity="0.55"/>
+  <path d="M415 190 L376 205 M434 258 L386 272 M452 330 L398 344" stroke="#39414A" stroke-width="4" stroke-opacity="0.55"/>
+  <!-- High Storm Collar -->
+  <path d="M184 114 L196 58 Q260 44 324 58 L336 114 Q260 132 184 114 Z" fill="url(#chromeBody)" stroke="#39414A" stroke-width="3"/>
+  <path d="M204 68 Q260 56 316 68 L314 98 Q260 110 206 98 Z" fill="#1C2127"/>
+  <!-- Center Waterproof Zip & Storm Flap -->
+  <rect x="255" y="96" width="10" height="369" fill="#14181D"/>
+  <rect x="258" y="96" width="4" height="369" fill="#46505A"/>
+  <rect x="253" y="138" width="14" height="18" rx="2" fill="#24FF6A"/>
+  <!-- Hem & Cuffs -->
+  <rect x="150" y="448" width="220" height="18" rx="4" fill="#1B2026"/>
+  <rect x="49" y="424" width="68" height="18" rx="4" transform="rotate(10 49 424)" fill="#1B2026"/>
+  <rect x="403" y="436" width="68" height="18" rx="4" transform="rotate(-10 403 436)" fill="#1B2026"/>
+</svg>

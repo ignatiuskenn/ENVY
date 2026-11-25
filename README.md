@@ -88,8 +88,8 @@ Open `http://localhost:5173` in your browser.
 
 Run `php artisan migrate:fresh --seed` inside `backend/` to reset the database and seed:
 - **1 Demo Admin User**
-- **3 Categories**: `Tops & Outerwear`, `Bottoms`, `Footwear & Gear`
-- **12 ENVY Products** (including 1 inactive product: `ENVY Prototype Knit Trainer`, 1 active `0`-stock product: `ENVY Legacy Oversized Tee`, and `PHP 120.00` / `PHP 85.50` items for exact centavo verification)
+- **3 Categories**: `Gorpcore Jackets`, `Y2K T-Shirts`, `Streetwear Pants`
+- **12 ENVY Products** (including 1 inactive product: `ENVY Prototype Exo-Shell Pant`, 1 active `0`-stock product: `ENVY Legacy Y2K Graphic Tee`, and `PHP 120.00` / `PHP 85.50` items for exact centavo verification)
 
 ---
 

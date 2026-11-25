@@ -23,7 +23,7 @@ class CheckoutTest extends TestCase
     public function test_checkout_validates_required_fields_and_blocks_whitespace_name(): void
     {
         $this->actAsCustomer();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail();
 
         $response = $this->postJson('/api/checkout', [
             'customer_name' => '   ',
@@ -49,7 +49,7 @@ class CheckoutTest extends TestCase
     public function test_checkout_detects_price_or_availability_changes_and_returns_conflict(): void
     {
         $this->actAsCustomer();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail();
 
         $response = $this->postJson('/api/checkout', [
             'customer_name' => 'Alex Rivera',
@@ -93,8 +93,8 @@ class CheckoutTest extends TestCase
     public function test_checkout_calculates_exact_php_325_50_total_creates_snapshots_and_deducts_stock(): void
     {
         $this->actAsCustomer();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail(); // PHP 120.00, stock 40
-        $band = Product::where('name', 'ENVY Performance Wristband')->firstOrFail(); // PHP 85.50, stock 35
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail(); // PHP 120.00, stock 40
+        $band = Product::where('name', 'ENVY Tribal Mesh Jersey Tee')->firstOrFail(); // PHP 85.50, stock 35
 
         $response = $this->postJson('/api/checkout', [
             'customer_name' => 'Alex Rivera',
@@ -124,7 +124,7 @@ class CheckoutTest extends TestCase
 
         $this->assertDatabaseHas('order_items', [
             'product_id' => $socks->id,
-            'product_name_snapshot' => 'ENVY Crew Socks',
+            'product_name_snapshot' => 'ENVY Acid-Wash Boxy Tee',
             'unit_price_snapshot' => '120.00',
             'quantity' => 2,
             'line_total' => '240.00',

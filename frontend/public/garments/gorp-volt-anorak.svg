@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="voltGreen" x1="120" y1="80" x2="380" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D7FF32"/>
+      <stop offset="55%" stop-color="#9EFF14"/>
+      <stop offset="100%" stop-color="#6DD400"/>
+    </linearGradient>
+  </defs>
+  <!-- Hood -->
+  <path d="M186 112 L202 44 Q260 30 318 44 L334 112 Z" fill="url(#voltGreen)" stroke="#1E242B" stroke-width="3"/>
+  <!-- Main Volt Jacket Body -->
+  <path d="M185 108 L112 136 L54 326 L44 468 L108 476 L142 308 L146 534 L374 534 L378 308 L412 476 L476 468 L466 326 L408 136 L335 108 Z" fill="url(#voltGreen)" stroke="#1E242B" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Matte Black Contrast Shoulder & Underarm Panels (KALLE Volt Shell style) -->
+  <path d="M185 108 L112 136 L88 214 L152 204 L185 156 Z" fill="#171C21"/>
+  <path d="M335 108 L408 136 L432 214 L368 204 L335 156 Z" fill="#171C21"/>
+  <path d="M142 308 L146 534 L188 534 L188 308 Z" fill="#171C21"/>
+  <path d="M378 308 L374 534 L332 534 L332 308 Z" fill="#171C21"/>
+  <!-- Center Black Zip -->
+  <rect x="255" y="96" width="10" height="438" fill="#111518"/>
+  <!-- Vertical Aquaguard Chest Zip -->
+  <rect x="292" y="196" width="7" height="106" rx="2" fill="#111518"/>
+  <rect x="291" y="210" width="9" height="14" fill="#F3F6F8"/>
+  <!-- Cuffs & Hem -->
+  <rect x="146" y="516" width="228" height="18" fill="#111518"/>
+  <rect x="44" y="458" width="66" height="16" transform="rotate(8 44 458)" fill="#111518"/>
+  <rect x="410" y="467" width="66" height="16" transform="rotate(-8 410 467)" fill="#111518"/>
+</svg>

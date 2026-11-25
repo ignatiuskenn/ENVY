@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="rawDenim" x1="140" y1="70" x2="380" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#373F49"/>
+      <stop offset="50%" stop-color="#222830"/>
+      <stop offset="100%" stop-color="#14181D"/>
+    </linearGradient>
+  </defs>
+  <!-- Baggy Carpenter Denim Silhouette -->
+  <path d="M150 76 H370 L396 556 L284 556 L260 272 L236 556 L124 556 Z" fill="url(#rawDenim)" stroke="#525D69" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Waistband + Fly + Contrast Stitching -->
+  <rect x="150" y="76" width="220" height="30" fill="#181D22" stroke="#525D69" stroke-width="2"/>
+  <line x1="260" y1="106" x2="260" y2="210" stroke="#9AA5B1" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <!-- Double-Knee Carpenter Panels -->
+  <rect x="134" y="246" width="96" height="176" rx="4" fill="#2A3139" stroke="#9AA5B1" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="290" y="246" width="96" height="176" rx="4" fill="#2A3139" stroke="#9AA5B1" stroke-width="2" stroke-dasharray="6 4"/>
+  <!-- Hammer Loop -->
+  <path d="M376 232 Q402 252 380 278" stroke="#24FF6A" stroke-width="5" stroke-linecap="round" fill="none"/>
+</svg>

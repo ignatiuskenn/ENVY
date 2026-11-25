@@ -16,7 +16,7 @@ class SecurityHardeningTest extends TestCase
     {
         $this->seed();
         Sanctum::actingAs(User::where('email', 'admin@envy-demo.test')->firstOrFail());
-        $tops = Category::where('name', 'Tops & Outerwear')->firstOrFail();
+        $tops = Category::where('name', 'Gorpcore Jackets')->firstOrFail();
 
         $this->postJson('/api/admin/products', [
             'category_id' => $tops->id,

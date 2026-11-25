@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="nylonCargo" x1="120" y1="60" x2="400" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#303841"/>
+      <stop offset="100%" stop-color="#171C21"/>
+    </linearGradient>
+  </defs>
+  <!-- Wide-leg Parachute Cargo Silhouette -->
+  <path d="M148 74 H372 L408 552 L286 558 L260 278 L234 558 L112 552 Z" fill="url(#nylonCargo)" stroke="#4A5561" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Elastic Drawstring Waist -->
+  <rect x="148" y="74" width="224" height="32" fill="#111518" stroke="#4A5561" stroke-width="2"/>
+  <path d="M248 106 L236 154 M272 106 L284 154" stroke="#24FF6A" stroke-width="4" stroke-linecap="round"/>
+  <!-- Knee Pleats -->
+  <path d="M126 330 Q180 342 238 330 M282 330 Q340 342 394 330" stroke="#4A5561" stroke-width="3"/>
+  <!-- Gusseted 3D Side Cargo Pockets -->
+  <path d="M122 236 L176 236 L174 334 L118 334 Z" fill="#232A32" stroke="#4A5561" stroke-width="2"/>
+  <path d="M344 236 L398 236 L402 334 L346 334 Z" fill="#232A32" stroke="#4A5561" stroke-width="2"/>
+  <rect x="122" y="236" width="54" height="18" fill="#15191E"/>
+  <rect x="344" y="236" width="54" height="18" fill="#15191E"/>
+  <!-- Ankle Toggle Drawcords -->
+  <line x1="112" y1="536" x2="234" y2="542" stroke="#24FF6A" stroke-width="3"/>
+  <line x1="286" y1="542" x2="408" y2="536" stroke="#24FF6A" stroke-width="3"/>
+</svg>

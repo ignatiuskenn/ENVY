@@ -28,7 +28,24 @@ class SaveProductRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:5000'],
             'price' => ['required', 'numeric', 'gt:0'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
-            'image_url' => ['nullable', 'url:http,https', 'max:2048'],
+            'image_url' => [
+                'nullable',
+                'string',
+                'max:2048',
+                function (string $attribute, mixed $value, \Closure $fail): void {
+                    if ($value === null || $value === '') {
+                        return;
+                    }
+                    $str = (string) $value;
+                    $isLocalAsset = str_starts_with($str, '/') && ! str_starts_with($str, '//');
+                    $isHttpUrl = filter_var($str, FILTER_VALIDATE_URL) !== false
+                        && in_array(parse_url($str, PHP_URL_SCHEME), ['http', 'https'], true);
+
+                    if (! $isLocalAsset && ! $isHttpUrl) {
+                        $fail('The image URL must be an http/https URL or a valid local asset path.');
+                    }
+                },
+            ],
             'is_active' => ['required', 'boolean'],
         ];
     }

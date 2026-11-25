@@ -57,7 +57,7 @@ class RbacAndCustomerAuthTest extends TestCase
     public function test_unauthenticated_checkout_is_blocked_and_authenticated_customer_links_order(): void
     {
         $this->seed();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail();
         $customer = User::where('email', 'customer@envy-demo.test')->firstOrFail();
 
         $payload = [
@@ -82,7 +82,7 @@ class RbacAndCustomerAuthTest extends TestCase
     public function test_my_orders_returns_only_authenticated_customers_orders(): void
     {
         $this->seed();
-        $socks = Product::where('name', 'ENVY Crew Socks')->firstOrFail();
+        $socks = Product::where('name', 'ENVY Acid-Wash Boxy Tee')->firstOrFail();
         $customer = User::where('email', 'customer@envy-demo.test')->firstOrFail();
         $other = User::factory()->create(['email' => 'other@example.com']);
 

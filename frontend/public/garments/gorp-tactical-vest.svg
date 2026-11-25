@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="tacticalSlate" x1="140" y1="80" x2="380" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2D353E"/>
+      <stop offset="100%" stop-color="#15191E"/>
+    </linearGradient>
+  </defs>
+  <path d="M185 104 L118 130 L64 316 L54 456 L112 462 L144 306 L146 532 L374 532 L376 306 L408 462 L466 456 L456 316 L402 130 L335 104 Z" fill="url(#tacticalSlate)" stroke="#48535F" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Stand Collar -->
+  <path d="M184 106 L196 62 Q260 52 324 62 L336 106 Z" fill="#1E242B" stroke="#48535F" stroke-width="2.5"/>
+  <!-- Webbing Molle Straps -->
+  <rect x="172" y="160" width="176" height="12" fill="#0F1317"/>
+  <rect x="255" y="88" width="10" height="444" fill="#0F1317"/>
+  <!-- 4 Modular Utility Pouches -->
+  <rect x="168" y="196" width="72" height="92" rx="4" fill="#232A32" stroke="#48535F" stroke-width="2"/>
+  <rect x="280" y="196" width="72" height="92" rx="4" fill="#232A32" stroke="#48535F" stroke-width="2"/>
+  <rect x="168" y="324" width="76" height="114" rx="4" fill="#232A32" stroke="#48535F" stroke-width="2"/>
+  <rect x="276" y="324" width="76" height="114" rx="4" fill="#232A32" stroke="#48535F" stroke-width="2"/>
+  <!-- Buckle Clips -->
+  <rect x="196" y="218" width="16" height="14" rx="2" fill="#24FF6A"/>
+  <rect x="308" y="218" width="16" height="14" rx="2" fill="#24FF6A"/>
+</svg>

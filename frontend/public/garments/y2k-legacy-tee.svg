@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" fill="none">
+  <defs>
+    <linearGradient id="chromePrint" x1="180" y1="200" x2="340" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#8A96A3"/>
+      <stop offset="100%" stop-color="#E8EEF3"/>
+    </linearGradient>
+  </defs>
+  <!-- Slightly Cropped Y2K Boxy Tee -->
+  <path d="M194 98 L98 136 L58 266 L132 294 L152 224 L152 486 L368 486 L368 224 L388 294 L462 266 L422 136 L326 98 Q260 124 194 98 Z" fill="#1D2228" stroke="#47515C" stroke-width="2.5"/>
+  <path d="M192 98 Q260 130 328 98 Q260 112 192 98 Z" fill="#101418" stroke="#47515C" stroke-width="2"/>
+  <!-- Chrome Y2K Oval Crest -->
+  <ellipse cx="260" cy="252" rx="74" ry="34" stroke="url(#chromePrint)" stroke-width="4" transform="rotate(-10 260 252)"/>
+  <text x="260" y="262" text-anchor="middle" fill="url(#chromePrint)" font-family="sans-serif" font-size="32" font-weight="900" letter-spacing="4">ENVY</text>
+</svg>

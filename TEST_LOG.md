@@ -8,7 +8,7 @@ Test results against the 10 acceptance checks defined in Section 17 of the CubeT
 
 | ID | Acceptance Check | Result | Verification & Notes |
 | :--- | :--- | :--- | :--- |
-| **01** | Search, category filter, and both price sorts work together; no-match and invalid product states handled. | **Pass** | Verified in live browser (`"socks"`, `"envy"`, `Bottoms` filter, `price_asc` & `price_desc`, inactive product hidden) and `StorefrontTest`. |
+| **01** | Search, category filter, and both price sorts work together; no-match and invalid product states handled. | **Pass** | Verified in `StorefrontTest` (combined search, `Streetwear Pants` filter, `price_desc` sort, inactive item hidden) and live storefront. |
 | **02** | Cart merges duplicate products, persists after refresh, and calculates the `PHP 325.50` example correctly. | **Pass** | Verified in live browser (`2 × PHP 120.00 + 1 × PHP 85.50 = PHP 325.50`, persisted across reload) and `money.js` assertion. |
 | **03** | Empty checkout, invalid customer fields, and invalid/excessive quantities are blocked. | **Pass** | Verified in live browser (empty/invalid email & phone errors shown) and `CheckoutTest::test_checkout_validates_required_fields_and_blocks_whitespace_name`. |
 | **04** | Inactive/out-of-stock items cannot be ordered; checkout detects price or availability changes before saving. | **Pass** | Verified `Out of Stock` disabled button in live browser; `409 Conflict` price/availability/stock detection verified in `CheckoutTest`. |

@@ -1,5 +1,7 @@
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import { ArrowLeft, ShoppingBag } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ProductCard } from '../../components/shared/ProductCard';
 import { EmptyState, ErrorState, LoadingState } from '../../components/ui/StateFeedback';
@@ -8,9 +10,12 @@ import { useCart } from '../../data/context/useCart';
 import { useAsyncData } from '../../hooks/useAsyncData';
 import { formatPeso } from '../../utils/money';
 
+gsap.registerPlugin(useGSAP);
+
 export function ProductDetailPage() {
   const { id } = useParams();
   const { addItem } = useCart();
+  const detailContainerRef = useRef(null);
 
   const [qtyState, setQtyState] = useState({ id, value: 1 });
   const [feedback, setFeedback] = useState('');
@@ -31,6 +36,31 @@ export function ProductDetailPage() {
 
   const product = data?.data || null;
   const related = data?.related || [];
+
+  useGSAP(
+    () => {
+      if (!product) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      gsap.from('[data-detail-garment]', {
+        opacity: 0,
+        scale: 0.9,
+        y: 20,
+        duration: 0.55,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+      });
+      gsap.from('[data-detail-info]', {
+        opacity: 0,
+        x: 18,
+        duration: 0.5,
+        delay: 0.08,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+      });
+    },
+    { scope: detailContainerRef, dependencies: [product?.id] }
+  );
 
   const handleAdd = (item, qty = 1) => {
     const res = addItem(item, qty);
@@ -76,7 +106,7 @@ export function ProductDetailPage() {
   const isOutOfStock = product.stock_quantity <= 0;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div ref={detailContainerRef} className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <Link
         to="/products"
         className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#8A99AD] hover:text-[#24FF6A]"
@@ -86,12 +116,15 @@ export function ProductDetailPage() {
       </Link>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-2">
-        <div className="relative overflow-hidden rounded-lg border border-[#262E36] bg-[#171C21]">
+        <div
+          data-detail-garment
+          className="kalle-studio-grid relative overflow-hidden rounded-lg border border-[#262E36] p-8"
+        >
           {product.image_url ? (
             <img
               src={product.image_url}
               alt={product.name}
-              className="aspect-square w-full object-cover"
+              className="aspect-square w-full object-contain drop-shadow-[0_24px_32px_rgba(0,0,0,0.72)]"
             />
           ) : (
             <div className="flex aspect-square items-center justify-center font-mono text-sm text-[#8A99AD]">
@@ -103,7 +136,7 @@ export function ProductDetailPage() {
           </span>
         </div>
 
-        <div className="flex flex-col">
+        <div data-detail-info className="flex flex-col">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#8A99AD]">
             {product.category?.name || 'Apparel'}
           </span>
@@ -169,7 +202,7 @@ export function ProductDetailPage() {
               type="button"
               disabled={isOutOfStock}
               onClick={() => handleAdd(product, quantity)}
-              className="inline-flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm bg-[#24FF6A] px-6 py-3 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] transition hover:bg-[#4dff88] disabled:cursor-not-allowed disabled:bg-[#262E36] disabled:text-[#8A99AD]"
+              className="inline-flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-sm bg-[#24FF6A] px-6 py-3 font-mono text-xs font-black uppercase tracking-wider text-[#0B0E11] transition hover:bg-[#4dff88] active:scale-95 disabled:cursor-not-allowed disabled:bg-[#262E36] disabled:text-[#8A99AD]"
             >
               <ShoppingBag className="h-4 w-4" />
               {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
