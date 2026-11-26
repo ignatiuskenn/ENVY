@@ -143,5 +143,5 @@ Run `php artisan migrate:fresh --seed` inside `backend/` to reset the database a
 
 ## Scope Notes & AI Disclosure
 
-- **Single-SKU Clothing Products**: Each ENVY apparel item tracks one `stock_quantity` (size/color variant matrices were omitted to align cleanly with the assessment's data model and 15–20 hour scope).
+- **Single-SKU Clothing Products**: Each ENVY apparel item tracks one `stock_quantity` (size/color variant matrices were omitted to align cleanly with the assessment's data model).
 - **AI Assistance Disclosure**: Built with AI coding assistance (Google Antigravity) for scaffolding, test generation, code review, and documentation, with all code reviewed, tested (`php artisan test`, `npm run lint`, `npm run build`).
